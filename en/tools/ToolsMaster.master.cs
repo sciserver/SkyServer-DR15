@@ -46,11 +46,8 @@ namespace SkyServer.Tools
               //gutter += "4.2,Mosaics,/tools/getimg/mosaic.aspx;";
               
               //if (globals.DbType == "BEST")
-              if( globals.Database.StartsWith("BEST")) 
-              {
-                  gutter += "4.3,Spectra,/tools/getimg/spectra.aspx;";
-                  gutter += "4.4,Plates,/tools/getimg/plate.aspx;";
-              }
+              gutter += "4.3,Spectra,/tools/getimg/spectra.aspx;";
+              gutter += "4.4,Plates,/tools/getimg/plate.aspx;";
 
               gutter += "7,Scrolling sky,/tools/scroll/;";
 
