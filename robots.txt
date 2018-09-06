@@ -1,0 +1,17 @@
+User-agent: *
+Disallow: /en/tools/scroll/
+Disallow: /de/tools/scroll/
+Disallow: /jp/tools/scroll/
+Disallow: /en/tools/navi/
+Disallow: /de/tools/navi/
+Disallow: /jp/tools/navi/
+Disallow: /en/tools/explore/
+Disallow: /de/tools/explore/
+Disallow: /jp/tools/explore/
+Disallow: /en/get/
+Disallow: /de/get/
+Disallow: /jp/get/
+Disallow: /en/tools/
+Disallow: /en/help/
+Disallow: /en/
+Disallow: /Skyserver/

@@ -1,0 +1,116 @@
+Hi Jordan.
+
+Here is my procedure for locating asteroids in SDSS images. I think it 
+would make an excellent addition to the SkyServer activities, 
+particularly the one on asteroids. Some editing may be necessary; just 
+let me know.
+
+-----begin
+
+Finding asteroids in SDSS images can be tedious when done by simple 
+visual inspection of the images. A more efficient way it to use 
+computer software to help find asteroids. Traditionally, this involves 
+taking an image of the same part of the sky at no fewer than two 
+different instants and then using computer software to "stack" the 
+images, which simply means to overlay the two images so that 
+corresponding stars are aligned. The computer software then rapidly 
+displays the individual images in succession, a technique called 
+"blinking". The stars, being fixed objects, do not wiggle but 
+asteroids, being moving targets, will appear to wiggle from image to 
+image. SDSS images allow us to use a slight variation on this technique 
+that relies on the fact that an image of a given part of the sky is 
+taken with different filters at slightly different times. Unlike 
+optical images, in which asteroids show up with the same color from 
+image to image, SDSS images show asteroids in two different colors. An 
+SDSS image is also a composite of three different colored images and 
+each separate component image is taken at a slightly different time 
+from the other images. Think of an SDSS image as three different images 
+that have been digitally "stacked" as described above. If we could 
+somehow "unstack" an SDSS image and then "blink" the individual 
+component images, we might just be able to detect asteroids! In 
+practice, this technique works and here is how to do it.
+
+The first step is to obtain a computer program that will manipulate the 
+images for us. An excellent choice is ImageJ, developed by the National 
+Institutes of Health. ImageJ is a Java program that runs under Linux, 
+Mac OS 9, and Mac OS X, and Windows. It is freely available by download 
+at the URL <http://rsb.info.nih.gov/ij/>. Your computer must have the 
+capability to run Java programs. Your instructor or teacher can give 
+you more information about making sure your computer can run Java 
+programs as some additional software may be necessary if not already 
+present. ImageJ has many advanced features needed for different kinds 
+of image analysis, including astronomical work and medical work. If you 
+have not done so, or if your instructor has not yet done so, you will 
+need to download and install ImageJ on your computer. Instructions are 
+provided in the download archive.
+
+The second step, assuming ImageJ is now properly installed on your 
+computer, is to get an SDSS image. You can use the Get Fields tool to 
+retrieve an image given its run, camcol, and field numbers. Be sure to 
+get the largest image you can, 1984x1361 pixels. This will make seeing 
+the asteroids visually easier. Once you have an image, use your browser 
+to save the image to your desktop. We recommend that you rename the 
+image according to its run, camcol, and field. The example image we are 
+using has been named r752c1f373.jpg, indicating Run 752, Camcol 1, 
+Field 373. Note that the image has been saved in JPG format, which is 
+fine for our purposes.
+
+The third step is to load the image into ImageJ for analysis. Your 
+instructor or teacher will give you instructions on how to start the 
+ImageJ program. Once it has been started, select File -> Open from the 
+program's menu and load your image into ImageJ. The image will then be 
+displayed in a window on your screen.
+
+The fourth step is to separate the composite image into its three 
+component images. The composite image is called an RGB image, meaning a 
+combination of red, green, and blue images. Actually, these are just 
+names given to the three component images and they might not 
+necessarily correspond to actual red, green, or blue as we usually 
+think of them. This is not important for our purposes however. To do 
+this in ImageJ, select Image -> Color -> RGB Split. You will see the 
+original image replaced by three separate images. Note that each one 
+will be labeled with its component color.
+
+The fifth step is to create an image "stack" with the three component 
+images. To do this, select Image -> Stacks -> Convert Images to Stack. 
+We now have one single image again, or so it appears. In a way, we are 
+just undoing the separation we just performed but that is not exactly 
+what we are doing. We are instructing ImageJ to put the component 
+images together in a way that allows us to animate them, blinking them 
+in quick succession.
+
+The sixth step is to animate the stack to see what wiggles. To do that, 
+select Image -> Stacks -> Start Animation. By default, ImageJ will 
+cycle through the three component images at one second intervals, but 
+this interval can be adjusted if desired. Depending on your computer's 
+speed and memory capacity, blinking may slow down your computer and it 
+may be slow to respond to key and mouse movements. A better option 
+might be to use the > and < keys to manually cycle through the 
+component images so you can start and stop as you wish. Stars and 
+galaxies in the images will remain stationary with respect to each 
+other. Their brightnesses may change, but their positions will not 
+change. If you see a dot that moves as ImageJ blinks the images, you 
+have most likely found an asteroid! You can get the location of your 
+find by moving the mouse cursor to the dot that moves. The coordinates 
+of this dot, in pixels, will be displayed in the main ImageJ window, 
+the one with the tool buttons. In our sample image, a moving object is 
+seen at coordinates X=894, Y=225. You should always look at the same 
+coordinates in the original image, which you can reload into ImageJ 
+using File -> Open again, to confirm whether or not there is actually 
+something there. An asteroid on the original image will show up as two 
+close but separate dots, one usually green and the other usually blue. 
+In accordance with good scientific practice, your asteroid discoveries 
+should always be followed up by visual inspection of the original 
+image. When you record your findings, be sure to include the 
+coordinates of each asteroid in your records so that other astronomers 
+can verify your findings and use them for future work and for 
+reference. Upon looking at the original image, we surely do see a pair 
+of blue and green dots at very close to the location above. You can 
+always zoom the image to get more precise coordinate readings.
+
+-----end
+
+Are there any more details I should include? How about screenshots?
+
+Cheers,
+Joe Heafner -- Astronomy/Physics Instructor (by some definitions)

@@ -1,0 +1,133 @@
+<html>
+<head>
+<title>Measure redshifts</title>
+<style>
+  a,p,td,h1,h2,h3,h4,h5,h6,span {font-family:arial,helvetica,sans-serif;color:#ffffff;}
+  em		{color:#cccc55;font-weight:800;}
+  h1		{font-size:16pt;}
+  a			{color: #aaaaff;text-decoration:none;font-weight:bold;}
+  td		{font-family:arial,helvetica,sans-serif;color:#ddddff;}
+  #logo		{position:absolute;top:0px;left:0px;}
+  #title	{position:absolute;top:10px;left:100px;z-index:1;
+			 color: #8877ff;font-size:24pt;font-weight:bold;font-family: arial,helvetica,sans-serif;}
+  #spectrum	{position:absolute; top:180px; left:120px;z-index:0;}
+  #template	{position:absolute; top:180px; left:120px;z-index:1;}
+  #select	{position:absolute; top:70px;left:100px;width:600px;}
+  #ctrl 	{position:absolute; top:620px;left:328px;}
+  #display 	{position:absolute; top:500px;left:0px;}
+  #text		{position:absolute; top:70px; left:200px; width:500px;}
+  .i		{font-family:arial,helvetica,sans-serif;color:#00ff00;font-weight:bold;}
+
+</style>
+<script src="naviClass.js"></script>
+
+</head>
+
+<body style="COLOR: #ffffff; OVERFLOW-X: hidden; OVERFLOW-Y: scroll; WIDTH: 100%;" bgColor="#000030">
+
+<div id="logo"><img src="images/sdssIVlogo.png" height="70"></div>
+<div id="title">Measuring Galaxy Redshifts </div>
+<div id="display"></div>
+<div id="spectrum"><IMG name="simg" src="images/spSpec-51943-0284-447.gif" width="596" height="388" ></div>
+<div id="template"><IMG name="timg" src="images/template1.gif" width="596" height="388" ></div>
+
+
+    <script>
+
+        function declareSrc(parent, obj) {
+            return eval((document.layers) ?
+            (parent == '' ? '' : 'document.' + parent + '.') + 'document.' + obj :
+            'document.all.' + obj);
+        }
+
+        function showZ(shift) {
+            var scale = 0.001313;
+            var z = Math.floor(1000. * (Math.exp(shift * scale) - 1.0)) / 1000;
+            display.setBody("<span class='i'>Redshift is " + z + "</span>");
+        }
+
+        function moveTemplate(d) {
+            shift += d;
+            template.moveBy(d, 0);
+            showZ(shift);
+        }
+
+        function loadSimg(o) {
+            var s = "images/spSpec-51943-0284-";
+            simg.src = s + o.options[o.selectedIndex].value + ".gif";
+        }
+
+        function loadTimg(o) {
+            var s = "images/template";
+            timg.src = s + o.options[o.selectedIndex].value + ".gif";
+        }
+
+        var spectrum = new Div('spectrum', 100, 220);
+        var template = new Div('template', 100, 220);
+        var display = new Div('display', 360, 190);
+        var simg = declareSrc('spectrum', 'simg');
+        var timg = declareSrc('template', 'timg');
+        var shift = 0;
+
+        showZ(shift);
+
+</script>
+
+<div id="select">
+<form METHOD="get" ACTION=""  name=form1>
+<table width=640 align="middle" cellpadding=8>
+<tr><td valign="top">
+
+<table border=5 cellspacing="3" cellpadding="3" bgcolor=#333360>
+  <tr>
+    <td>Spectrum</td><td>
+		<select name="P" onChange="loadSimg(this);" length=12>
+		<option value="447" > Obj 447
+		<option value="453" > Obj 453
+		<option value="455" > Obj 455
+		<option value="522" > Obj 522
+		<option value="523" > Obj 523
+		<option value="525" > Obj 525
+		<option value="526" > Obj 526
+		<option value="527" > Obj 527
+		<option value="530" > Obj 530
+		<option value="580" > Obj 580
+		</option>
+		</select>
+	</td>
+  </tr>
+  <tr>
+    <td>Template</td><td>
+		<select name="P" onChange="loadTimg(this);" length=4>
+		<option value="1"> No 1
+		<option value="2"> No 2
+		<option value="3"> No 3
+		<option value="4"> No 4
+		<option value="5"> No 5
+		<option value="6"> No 6
+		<option value="7"> No 7
+		<option value="8"> No 8
+		<option value="9"> No 9
+		</option>
+		</select>
+	</td>
+	</tr>
+</table>
+</td><td><p>You can select one of the 10 spectra, and one of the 9 spectral templates.
+By clicking on the left and right arrows, you can step the templates through
+a set of different redshifts. Look for the best template/redshift match.</p>
+</td></tr></table>
+</form>
+</div>
+
+<div id="ctrl">
+<form METHOD="get" ACTION="" name=form2>
+	<input TYPE=button name=move value="<<"  onClick="moveTemplate(-10);">
+	<input TYPE=button name=move value="Left"  onClick="moveTemplate(-1);">
+	<input TYPE=button name=move value="Right" onCLick="moveTemplate( 1);">
+	<input TYPE=button name=move value=">>" onCLick="moveTemplate(10);">
+</form>
+</div>
+
+</BODY>
+</HTML>

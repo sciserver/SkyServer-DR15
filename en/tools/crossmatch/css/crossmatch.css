@@ -1,0 +1,72 @@
+﻿.scrollable-menu {
+    height: auto;
+    max-height: 200px;
+    overflow-x: hidden;
+}
+
+.jobList{
+
+  overflow-y: scroll;      
+  height: 100px;
+  overflow-x: hidden;  
+  /*position: absolute;*/
+}
+
+.tophead {
+  padding: 30px 10px;
+  margin-bottom: 30px;
+  color: inherit;
+  background-color: #eee;
+}
+
+.mylist-group {
+  border-radius: 2px;
+  -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, .075);
+          box-shadow: 0 1px 2px rgba(0, 0, 0, .075);
+   height: 120px;
+   overflow-y: scroll;      
+}
+
+.header-brand {
+  float: left;
+  height: 100px;
+  padding: 15px 15px;
+  font-size: 18px;
+  line-height: 20px;
+}
+
+
+th {
+    background-color: #e8e8e8;
+    color: black;
+}
+
+.sample-queries-button{
+    background-color: #e8e8e8;
+    border-style: solid;
+    border-width: 1px;
+}
+
+
+input[type=checkbox] {
+    transform: scale(1.2);
+    -ms-transform: scale(1.2);
+    -webkit-transform: scale(1.2);
+    padding: 10px;
+}
+
+
+.schema-browser{
+    border-style: solid;
+    border-width: 1px;
+}
+
+.hidden7thColumn tr > *:nth-child(7) {
+    display: none;
+}
+
+
+tbody tr {
+    cursor: pointer;
+}
+

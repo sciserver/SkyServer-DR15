@@ -1,0 +1,81 @@
+<html>
+
+<head>
+<title>Thermal Radiation Curves Applet</title>
+</head>
+
+<body bgcolor="#FFEFCE">
+
+<p align="center">
+<applet CODEBASE="." ARCHIVE="BlackBody.jar"
+CODE="blackbody.BlackBody.class" NAME="BlackBody" ID="BlackBody" WIDTH="500" HEIGHT="300"
+HSPACE="0" VSPACE="0" ALIGN="Middle">
+  <param name="Temp" value="5321">
+  <param name="showControls" value="false">
+  <param name="colorSwatch" value="1">
+  <param name="enableCursor" value="1">
+</applet>
+</p>
+
+<form>
+  <div align="center"><center><p><input type="button" value="15,000 Kelvin"
+  onclick="document.BlackBody.setTemperature(eval(15000))"><input type="button"
+  value="12,500 Kelvin" onclick="document.BlackBody.setTemperature(eval(12500))"><input
+  type="button" value="10,000 Kelvin"
+  onclick="document.BlackBody.setTemperature(eval(10000))"><input type="button"
+  value="7,500 Kelvin" onclick="document.BlackBody.setTemperature(eval(7500))"><input
+  type="button" value="5,000 Kelvin" onclick="document.BlackBody.setTemperature(eval(5000))"><input
+  type="button" value="2,500 Kelvin" onclick="document.BlackBody.setTemperature(eval(2500))">
+  </p>
+  </center></div>
+</form>
+
+<form NAME="SetT">
+  <p><b>Change the temperature</b><br>
+  <input TYPE="text" NAME="textBox" VALUE="5000" SIZE="10"><input TYPE="button"
+  VALUE="Enter" onClick="document.BlackBody.setTemperature(document.SetT.textBox.value)" id=button1 name=button1></p>
+</form>
+
+<p>You can use this applet to draw a thermal radiation curve for an object at 
+any temperature. Click one of the buttons above to draw a curve for a pre-selected 
+temperature, or enter another temperature in the text box above and click Enter. The 
+applet will automatically draw the thermal radiation curve for the chosen temperature.</p>
+<p>You can also set the curve's peak wavelength by clicking and dragging 
+the curve. The peak wavelength will appear on the yellow box at the bottom left, 
+expressed in nanometers (1 nm = 10 Angstroms = 10<sup>-9</sup> m). The temperature 
+for that curve will show up on the left.</p>
+
+<p>The curve does not change height as the temperature increases, but the scale 
+of intensity changes.</p>
+
+<p>The colors displayed in the applet do not accurately represent the 
+visible spectrum; they are a simulation using red, green, and blue. The colored 
+circles on the left represent the percent of each color present in the curve, 
+and show a simulation of the total color of the object.</p>
+
+<a name="eq"></a>
+<p>Here is the very complicated 
+<a href="#eq" onclick="window.open('equation.aspx','','width=300,height=230');">equation</a> that 
+determines the thermal radiation curve.</p>
+
+<div align="center"><center>
+
+<table border="1" width="90%">
+  <tr>
+    <td align="CENTER"><a href="http://www.phy.davidson.edu/Welcome.html" target><img
+    src="http://WebPhysics.davidson.edu/Logo_tiny.gif" border="1" align="TOP" width="52"
+    height="31"></a></td>
+    <td align="CENTER"><p>Applet written by <a href="http://webphysics.davidson.edu/Faculty/wc/Welcome.htm">Dr. Wolfgang Christian</a><br>
+     Courtesy of <a href="http://webphysics.davidson.edu/Applets/Applets.html">Physlets</a>, 
+     Davidson College.</p></td>
+    <td align="CENTER"><address>
+      <a href="http://webphysics.davidson.edu/welcome.htm" target><img
+      src="http://WebPhysics.davidson.edu/webphys_tiny.gif" border="1" align="TEXTTOP"
+      width="84" height="32"></a> 
+    </address>
+    </td>
+  </tr>
+</table>
+</center></div>
+</body>
+</html>

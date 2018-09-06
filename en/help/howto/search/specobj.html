@@ -1,0 +1,115 @@
+<html>
+<head>
+<title>SpecObj</title>
+
+<script>
+function done() {
+	window.close();
+}
+</script>
+</head>
+<body bgcolor=saddlebrown text=white>
+
+  <table WIDTH="600" border="0" cellspacing="3" cellpadding="3">
+    <tr>
+      <td>
+      <p></p>
+      <h1>SpecObj</h1>
+      <p>This table contains all information on spectra measured by the SDSS. The 
+      list below shows the columns most commonly searched. For a complete 
+      list, see the 
+          <A href="../../browser/browser.aspx#&&history=description+SpecObj+U" target='_blank'>
+              <font color=gold>Schema Browser <img src='../../../images/new_window.png' /></font>
+          </A>.
+       </p>
+      <table border="3" cellspacing="1" cellpadding=3 width="100%" id="AutoNumber1">
+        <tr>
+          <td width="24%"><font face="Arial" color="white">specObjID</font></td>
+          <td width="76%"><font face="Arial" color="white">unique ID for the 
+          spectrum</font></td>
+        </tr>
+        <tr>
+          <td width="24%"><font face="Arial" color="white">fiberID</font></td>
+          <td width="76%"><font face="Arial" color="white">fiber number (used in the Get Spectrum tool)</font></td>
+        </tr>
+        <tr>
+          <td width="24%"><font face="Arial" color="white">z</font></td>
+          <td width="76%"><font face="Arial" color="white">redshift</font></td>
+        </tr>
+<!--        <tr>
+          <td width="24%"><font face="Arial" color="white">zconf</font></td>
+          <td width="76%"><font face="Arial" color="white">confidence level in 
+          redshift</font></td>
+        </tr>-->
+        <tr>
+          <td width="24%"><font face="Arial" color="white">zErr</font></td>
+          <td width="76%"><font face="Arial" color="white">error in redshift</font></td>
+        </tr>
+          <tr>
+              <td width="24%"><font face="Arial" color="white">zWarning</font></td>
+              <td width="76%">
+                  <font face="Arial" color="white">
+                      a flag marking any errors in the redshift measurement
+                      for this spectrum; a value of 0 means the redshift is reliable
+                  </font>
+              </td>
+          </tr>
+        <tr>
+          <td width="24%"><font face="Arial" color="white">class </font>
+          </td>
+          <td width="76%"><font face="Arial" color="white">spectral 
+          classification ['GALAXY', 'QSO', or 'STAR']</font></td>
+        </tr>
+        <tr>
+          <td width="24%"><font face="Arial" color="white">ra</font></td>
+          <td width="76%"><font face="Arial" color="white">right ascension of object</font></td>
+        </tr>
+        <tr>
+          <td width="24%"><font face="Arial" color="white">dec</font></td>
+          <td width="76%"><font face="Arial" color="white">declination of object</font></td>
+        </tr>
+        <tr>
+          <td width="24%"><font face="Arial" color="white">fiberMag_u</font></td>
+          <td width="76%"><font face="Arial" color="white">fiber magnitude (object's magnitude seen 
+          through the hole where the spectral fiber is plugged) in u</font></td>
+        </tr>
+        <tr>
+          <td width="24%"><font face="Arial" color="white">fiberMag_g</font></td>
+          <td width="76%"><font face="Arial" color="white">fiber magnitude (object's magnitude seen 
+          through the hole where the spectral fiber is plugged) in g</font></td>
+        </tr>
+        <tr>
+          <td width="24%"><font face="Arial" color="white">fiberMag_r</font></td>
+          <td width="76%"><font face="Arial" color="white">fiber magnitude (object's magnitude seen 
+          through the hole where the spectral fiber is plugged)in r</font></td>
+        </tr>
+        <tr>
+          <td width="24%"><font face="Arial" color="white">fiberMag_i</font></td>
+          <td width="76%"><font face="Arial" color="white">fiber magnitude (object's magnitude seen 
+          through the hole where the spectral fiber is plugged) in i</font></td>
+        </tr>
+        <tr>
+          <td width="24%"><font face="Arial" color="white">fiberMag_z</font></td>
+          <td width="76%"><font face="Arial" color="white">fiber magnitude (object's magnitude seen 
+          through the hole where the spectral fiber is plugged) in z</font></td>
+        </tr>
+        <tr>
+          <td width="24%"><font face="Arial" color="white">bestObjID</font></td>
+          <td width="76%"><font face="Arial" color="white">photo ID of object as of the final data processing; 
+          bestObjID corresponds to "ObjID" in the PhotoObj table.</font></td>
+        </tr>
+        <tr>
+          <td width="24%"><font face="Arial" color="white">plateID</font></td>
+          <td width="76%"><font face="Arial" color="white">unique ID of the plate 
+          on which this object was observed, also stored in the plate table</font></td>
+        </tr>
+      </table>
+      <p><a href="javascript:done()"><font color=gold>Done</font></a></p>
+      <p>&nbsp;</p></td>
+    </tr>
+
+  </table>
+</div>
+
+</body>
+</html>

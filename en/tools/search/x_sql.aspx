@@ -1,0 +1,2 @@
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="x_sql.aspx.cs" Inherits="SkyServer.en.tools.search.x_sql" %>
+<% Response.Redirect("X_Results.aspx?" + Request.QueryString + "&searchtool=SQL&TaskName=Skyserver.Search.SQL");%>

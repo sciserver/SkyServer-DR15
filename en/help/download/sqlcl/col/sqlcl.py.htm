@@ -1,0 +1,117 @@
+<HTML><HEAD><TITLE>sqlcl.py</TITLE></HEAD>
+		  <BODY BGCOLOR=#FFFFFF>
+		  <!--header-->
+		  <!--script--><PRE><FONT COLOR=#1111CC>#!/usr/bin/python2</FONT>
+<FONT COLOR=#115511>"""&gt;&gt; sqlcl &lt;&lt; command line query tool by Tamas Budavari &lt;budavari@jhu.edu&gt;
+Usage: sqlcl [options] sqlfile(s)
+
+Options:
+        -s url	   : URL with the ASP interface (default: pha)
+        -f fmt     : set output format (html,xml,csv - default: csv)
+        -q query   : specify query on the command line
+        -l         : skip first line of output with column names
+        -v	   : verbose mode dumps settings in header
+        -h	   : show this message"""</FONT>
+
+formats = [<FONT COLOR=#115511>'csv'</FONT>,<FONT COLOR=#115511>'xml'</FONT>,<FONT COLOR=#115511>'html'</FONT>]
+
+astro_url=<FONT COLOR=#115511>'http://cas.sdss.org/astro/en/tools/search/x_sql.aspx'</FONT>
+public_url=<FONT COLOR=#115511>'http://cas.sdss.org/public/en/tools/search/x_sql.aspx'</FONT>
+collab_url=<FONT COLOR=#115511>'http://cas.sdss.org/collab/en/tools/search/x_sql.aspx'</FONT>
+
+default_url=collab_url
+default_fmt=<FONT COLOR=#115511>'csv'</FONT>
+
+<FONT COLOR=#3333CC><B>def</B></FONT><A NAME="usage"><FONT COLOR=#CC0000><B> usage</B></FONT></A>(status, msg=<FONT COLOR=#115511>''</FONT>):
+    <FONT COLOR=#115511>"Error message and usage"</FONT>
+    <FONT COLOR=#3333CC><B>print</B></FONT> __doc__
+    <FONT COLOR=#3333CC><B>if</B></FONT> msg:
+        <FONT COLOR=#3333CC><B>print</B></FONT> <FONT COLOR=#115511>'-- ERROR: %s'</FONT> % msg
+    sys.exit(status)
+
+<FONT COLOR=#3333CC><B>def</B></FONT><A NAME="filtercomment"><FONT COLOR=#CC0000><B> filtercomment</B></FONT></A>(sql):
+    <FONT COLOR=#115511>"Get rid of comments starting with --"</FONT>
+    <FONT COLOR=#3333CC><B>import</B></FONT> os
+    fsql = <FONT COLOR=#115511>''</FONT>
+    <FONT COLOR=#3333CC><B>for</B></FONT> line <FONT COLOR=#3333CC><B>in</B></FONT> sql.split(<FONT COLOR=#115511>'\n'</FONT>):
+        fsql += line.split(<FONT COLOR=#115511>'--'</FONT>)[0] + <FONT COLOR=#115511>' '</FONT> + os.linesep;
+    <FONT COLOR=#3333CC><B>return</B></FONT> fsql
+
+<FONT COLOR=#3333CC><B>def</B></FONT><A NAME="query"><FONT COLOR=#CC0000><B> query</B></FONT></A>(sql,url=default_url,fmt=default_fmt):
+    <FONT COLOR=#115511>"Run query and return file object"</FONT>
+    <FONT COLOR=#3333CC><B>import</B></FONT> urllib
+    fsql = filtercomment(sql)
+    params = urllib.urlencode({<FONT COLOR=#115511>'cmd'</FONT>: fsql, <FONT COLOR=#115511>'format'</FONT>: fmt})
+    <FONT COLOR=#3333CC><B>return</B></FONT> urllib.urlopen(url+<FONT COLOR=#115511>'?%s'</FONT> % params)    
+
+<FONT COLOR=#3333CC><B>def</B></FONT><A NAME="write_header"><FONT COLOR=#CC0000><B> write_header</B></FONT></A>(ofp,pre,url,qry):
+    <FONT COLOR=#3333CC><B>import</B></FONT>  time
+    ofp.write(<FONT COLOR=#115511>'%s SOURCE: %s\n'</FONT> % (pre,url))
+    ofp.write(<FONT COLOR=#115511>'%s TIME: %s\n'</FONT> % (pre,time.asctime()))    
+    ofp.write(<FONT COLOR=#115511>'%s QUERY:\n'</FONT> % pre)
+    <FONT COLOR=#3333CC><B>for</B></FONT> l <FONT COLOR=#3333CC><B>in</B></FONT> qry.split(<FONT COLOR=#115511>'\n'</FONT>):
+        ofp.write(<FONT COLOR=#115511>'%s   %s\n'</FONT> % (pre,l))
+    
+<FONT COLOR=#3333CC><B>def</B></FONT><A NAME="main"><FONT COLOR=#CC0000><B> main</B></FONT></A>(argv):
+    <FONT COLOR=#115511>"Parse command line and do it..."</FONT>
+    <FONT COLOR=#3333CC><B>import</B></FONT> os, getopt, string
+    
+    queries = []
+    url = os.getenv(<FONT COLOR=#115511>"SQLCLURL"</FONT>,default_url)
+    fmt = default_fmt
+    writefirst = 1
+    verbose = 0
+    
+    <FONT COLOR=#1111CC># Parse command line</FONT>
+    <FONT COLOR=#3333CC><B>try</B></FONT>:
+        optlist, args = getopt.getopt(argv[1:],<FONT COLOR=#115511>'s:f:q:vlh?'</FONT>)
+    <FONT COLOR=#3333CC><B>except</B></FONT> getopt.error, e:
+        usage(1,e)
+        
+    <FONT COLOR=#3333CC><B>for</B></FONT> o,a <FONT COLOR=#3333CC><B>in</B></FONT> optlist:
+        <FONT COLOR=#3333CC><B>if</B></FONT>   o==<FONT COLOR=#115511>'-s'</FONT>: url = a
+        <FONT COLOR=#3333CC><B>elif</B></FONT> o==<FONT COLOR=#115511>'-f'</FONT>: fmt = a
+        <FONT COLOR=#3333CC><B>elif</B></FONT> o==<FONT COLOR=#115511>'-q'</FONT>: queries.append(a)
+        <FONT COLOR=#3333CC><B>elif</B></FONT> o==<FONT COLOR=#115511>'-l'</FONT>: writefirst = 0
+        <FONT COLOR=#3333CC><B>elif</B></FONT> o==<FONT COLOR=#115511>'-v'</FONT>: verbose += 1
+        <FONT COLOR=#3333CC><B>else</B></FONT>: usage(0)
+        
+    <FONT COLOR=#3333CC><B>if</B></FONT> fmt <FONT COLOR=#3333CC><B>not</B></FONT> <FONT COLOR=#3333CC><B>in</B></FONT> formats:
+        usage(1,<FONT COLOR=#115511>'Wrong format!'</FONT>)
+
+    <FONT COLOR=#1111CC># Enqueue queries in files</FONT>
+    <FONT COLOR=#3333CC><B>for</B></FONT> fname <FONT COLOR=#3333CC><B>in</B></FONT> args:
+        <FONT COLOR=#3333CC><B>try</B></FONT>:
+            queries.append(open(fname).read())
+        <FONT COLOR=#3333CC><B>except</B></FONT> IOError, e:
+            usage(1,e)
+
+    <FONT COLOR=#1111CC># Run all queries sequentially</FONT>
+    <FONT COLOR=#3333CC><B>for</B></FONT> qry <FONT COLOR=#3333CC><B>in</B></FONT> queries:
+        ofp = sys.stdout
+        <FONT COLOR=#3333CC><B>if</B></FONT> verbose:
+            write_header(ofp,<FONT COLOR=#115511>'#'</FONT>,url,qry)
+        file = query(qry,url,fmt)
+        <FONT COLOR=#1111CC># Output line by line (in case it's big)</FONT>
+        line = file.readline()
+        <FONT COLOR=#3333CC><B>if</B></FONT> line.startswith(<FONT COLOR=#115511>"ERROR"</FONT>): <FONT COLOR=#1111CC># SQL Statement Error -&gt; stderr</FONT>
+            ofp = sys.stderr
+        <FONT COLOR=#3333CC><B>if</B></FONT> writefirst:
+            ofp.write(string.rstrip(line)+os.linesep)
+        line = file.readline()
+        <FONT COLOR=#3333CC><B>while</B></FONT> line:
+            ofp.write(string.rstrip(line)+os.linesep)
+            line = file.readline()
+
+
+<FONT COLOR=#3333CC><B>if</B></FONT> __name__==<FONT COLOR=#115511>'__main__'</FONT>:
+    <FONT COLOR=#3333CC><B>import</B></FONT> sys
+    main(sys.argv)
+
+
+
+
+
+</PRE>
+		  <!--footer-->
+		  </BODY>

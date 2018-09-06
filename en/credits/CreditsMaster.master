@@ -1,0 +1,10 @@
+﻿<%@ Master Language="C#" MasterPageFile="../HomeMaster.master" AutoEventWireup="true" CodeBehind="CreditsMaster.master.cs" Inherits="SkyServer.Credits.CreditsMaster" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+<p/>
+<% CreditsGutter.makeGutter(gselect, gutter); %>
+    <asp:ContentPlaceHolder ID="CreditsContent" runat="server">
+    
+    </asp:ContentPlaceHolder>
+</asp:Content>

@@ -1,0 +1,109 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="HomeMaster.master.cs" Inherits="SkyServer.HomeMaster" %>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head runat="server">
+  
+  <link href="../skyserver.css" rel="stylesheet" type="text/css" />
+  <link href="../alerts.css" rel="stylesheet" type="text/css" />
+  <link href="../FavIcon.ICO" rel="SHORTCUT ICON" />
+
+    <asp:ContentPlaceHolder id="csscanister" runat="server"></asp:ContentPlaceHolder>  <!-- a place to hold page-specific css files -->
+  
+  <title>SDSS SkyServer <%= globals.Release %></title>
+
+  <style type="text/css">
+    .hrule {color:#666666}
+    .stamptext {color:#aaaaaa;font-size:8pt;}
+  </style>
+
+  <asp:ContentPlaceHolder ID="head" runat="server"></asp:ContentPlaceHolder>
+
+</head>
+
+
+    
+
+
+<body background="<%= imgpath %>new_home_bktile.jpg" style="margin-left:25px;margin-top:0px;margin-right:25px;margin-bottom:0px;">
+
+    <%-- <script type="text/javascript">
+         function keystone_login(logout) {
+             if (logout) {
+                 window.location.href = "handleKeystone.aspx";
+             }
+             else {
+                 window.location.href = "<%= ConfigurationManager.AppSettings["Keystone.Login"]+HttpUtility.UrlEncode(Request.Url.AbsoluteUri)%>";
+        }
+    }
+    </script>--%>
+
+  <div id="div_title">
+    <table cellpadding="0" cellspacing="0" border="0" width="200px" style="height:73px">
+      <tr>
+        <td align="left" width="73px" style="height:73px;">
+          <a href="<%= globals.SdssUrlBase %>"><img alt="" class="imgnoborder" src="<%= imgpath %>sdssIVlogo.png" width="73px" /></a>
+        </td>
+        <td>
+          <table width="400px">
+            <tr>
+              <td width="400px" colspan="2" class="sdss3">Sloan Digital Sky Survey</td>
+            </tr>
+            <tr>
+              <td width="200px" class="bigsitetitle">SkyServer</td>
+              <td width="200px" class="sitename"><%= siteTitle %></td>
+            </tr>
+          </table>
+        </td>       
+
+        <td >
+            <img alt="" src="<%= imgpath %>imageright2.png" />
+        </td>
+        <td width="400px">
+            <asp:ContentPlaceHolder ID="Content1"  runat="server">
+                    <%@ Register TagPrefix="login" TagName="loginParam" Src="Loginfloat.ascx"  %>
+                    <login:loginParam ID="loginParams" runat="server"/>
+                </asp:ContentPlaceHolder>  
+
+            <%--<form id="form1" runat="server">        
+                  
+                <table><tr>
+                    <td><asp:Label ID="loginName" runat="server" Text="Guest" /></td>
+                    <td>
+                    <asp:ImageButton ID="KeystoneLogin" ImageUrl="../images/idies.png" OnClick="KeystoneLogin_Click" width="60" height="23" runat="server"></asp:ImageButton>                
+                    <asp:ImageButton ID="KeystoneLogout" ImageUrl="../images/sign-out.png" OnClick="KeystoneLogout_Click" width="60" height="23" runat="server"></asp:ImageButton>               
+                    </td>
+                 </tr></table>            
+             </form>--%>
+        </td>
+        <%--<td ><img alt="" src="<%= imgpath %>imageright2.png" /></td>--%>
+      </tr>
+    </table>
+  </div>
+  <div id="div_nav">
+    <table border="1" cellpadding="0" cellspacing="0" width="100%" style="height:25px;border-collapse:collapse;">
+      <tr bgcolor="#313131" style="height:23px">
+        <td style="border:1px solid black" nowrap="nowrap" class="navlink" align="center" width="70px"><a class="navlink" href="<%= url %>" target="_top" onmouseover="return escape('SkyServer front page')">&nbsp;&nbsp;Home&nbsp;&nbsp;</a></td>
+        <td style="border:1px solid black" nowrap="nowrap" class="navlink" align="center" width="70px"><a class="navlink" href="<%= url %>tools/" target="_top" onmouseover="return escape('Data mining and visual tools')">&nbsp;&nbsp;Data&nbsp;&nbsp;</a></td>
+        <td style="border:1px solid black" nowrap="nowrap" class="navlink" align="center" width="70px"><a class="navlink" href="<%= url %>help/browser/browser.aspx" target="_top" onmouseover="return escape('Schema Browser to view SDSS data model')">&nbsp;Schema&nbsp;</a></td>    
+        <td style="border:1px solid black" nowrap="nowrap" class="navlink" align="center" width="70px"><a class="navlink" href="<%= url %>proj/" target="_top" onmouseover="return escape('Activities for K-12 and college students and teachers')">&nbsp;&nbsp;Education&nbsp;&nbsp;</a></td>
+        <td style="border:1px solid black" nowrap="nowrap" class="navlink" align="center" width="85px"><a class="navlink" href="<%= url %>astro/" target="_top" onmouseover="return escape('Information about astronomy and its history')">&nbsp;&nbsp;Astronomy&nbsp;</a></td>
+        <td style="border:1px solid black" nowrap="nowrap" class="navlink" align="center" width="60px"><a class="navlink" href="<%= url %>sdss/" target="_top" onmouseover="return escape('Sloan Digital Sky Survey background and credits')">&nbsp;&nbsp;SDSS&nbsp;&nbsp;</a></td>
+        <td style="border:1px solid black" nowrap="nowrap" class="navlink" align="center" width="85px"><a class="navlink" href="<%= contactUrl %>" target="_top" onmouseover="return escape('SDSS Help Desk contact page')">&nbsp;&nbsp;Contact Us&nbsp;&nbsp;</a></td>
+        <td style="border:1px solid black" nowrap="nowrap" class="navlink" align="center" width="75px"><a class="navlink" href="<%= url %>help/download/" target="_top" onmouseover="return escape('Download SkyServer tools and papers')">&nbsp;&nbsp;Download&nbsp;&nbsp;</a></td>
+        <td style="border:1px solid black" nowrap="nowrap" class="navlink" align="center" width="85px"><a class="navlink" href="<%= url %>gsearch.aspx" onmouseover="return escape('Use Google to search this site')">&nbsp;Site Search&nbsp;</a></td>
+        <td style="border:1px solid black" nowrap="nowrap" class="navlink" align="center" width="60px"><a class="navlink" href="<%= url %>help/" target="_top" onmouseover="return escape('Help pages')">&nbsp;&nbsp;Help&nbsp;&nbsp;</a></td>
+        <td style="border:1px solid black" nowrap="nowrap" class="navlink" align="center" width="110px"><a class="navlink" href="<%= url %>tools/search/UserHistory.aspx" target="_top" onmouseover="return escape('Review SkyServer tools you have used in the past.')">&nbsp;&nbsp;History <i><em><strong><sup>NEW!</sup></strong> </em></i>   &nbsp;&nbsp;</a></td>
+        <td style="border:1px solid black" width="*">&nbsp;</td>
+      </tr>            
+    </table>
+  </div>  
+
+  <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server"></asp:ContentPlaceHolder>
+
+  <script language="JavaScript" type="text/javascript" src="<%= url %>wz_tooltip.js"></script>
+
+</body>
+
+</html>

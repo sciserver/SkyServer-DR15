@@ -1,0 +1,321 @@
+#toc   {position:absolute;top:70px;left:10px;}
+#search {position:absolute;top:0px;left:135px;}
+#content {position:absolute;top:0px;left:135px;}
+IMG {
+    border: none;
+}
+
+  h1,h2,h3,h4,h5,h6,p {FONT-FAMILY: arial,helvetica,sans-serif}
+  tr,td     	{FONT-FAMILY: arial,helvetica,sans-serif;FONT-SIZE: 10pt;}
+  body		{BACKGROUND-COLOR:#b0c4de;}  /* SDSS logo purple: #5e50ab; */    
+  /*body      {background-color:#cfcae5;} */
+  .c     	{FONT-FAMILY: arial,helvetica,sans-serif;FONT-SIZE: 10pt;}
+  .s     	{FONT-FAMILY: arial,helvetica,sans-serif;FONT-SIZE: 8pt;}
+  .i		{FONT-FAMILY: arial,helvetica,sans-serif;FONT-SIZE: 8pt;}
+  /* .h        { background-color: #b0c4de;} */
+  .h        { background-color: #bbbbbb;}
+   .b		{ background-color: #eeeeee;}
+   .t		{ background-color: #e0e0e0;}	
+   .l		{ background-color: #add8e6; }	
+ .hh	 {font-family: arial,helvetica,sans-serif;font-weight:bolder;font-size:10pt;}
+ .isize {width: 150px;font-size:10pt;font-family:courier;}
+ .qsize {width: 78px;font-size:10pt;font-family:courier;}
+ .aa    { color: #aaaaff; font-weight: bold; font-size:12pt;}
+ .bb    { color: #aaaaff; font-weight: bold; font-size:10pt;}
+.snavi     	{FONT-FAMILY: arial,helvetica,sans-serif;FONT-SIZE: 10pt;}    
+				
+				
+  .title 	{FONT-FAMILY: arial,helvetica,sans-serif;FONT-SIZE: 14pt;
+			FONT-weight:bold; FONT-WEIGHT:800; COLOR:#bbbbff}
+  .in	 	{WIDTH:64px; TEXT-ALIGN: right;}
+  .zm	 	{WIDTH:32px; TEXT-ALIGN: right;}
+  .lrg		{FONT-SIZE: 12pt;font-weight:bold;}
+	.helplink
+	{
+		color: #ff4400; 
+		font-size: 12pt;
+		font-weight: bold;
+	}
+  .quicklook {
+  BACKGROUND-COLOR:#e8e8e8; 
+  }
+
+.warning
+{
+    position:relative;
+    top:-24px;
+    left:80px;
+    background-color:pink;
+    width:540px;
+    margin-bottom:-25px;
+}|
+  
+  a.quicklook:hover {COLOR:#DD9900;}
+  
+  a		{COLOR: #221c4a;text-decoration:none;}
+  a:hover	{COLOR:#000000}
+
+  div.content 
+  { 
+      background-color: #ffffff; 
+      width:800px;
+      min-height:800px;
+  }
+  table.content td   
+  {
+      font-size:9pt; 
+      font-family: arial,helvetica,sans-serif; 
+      padding:0px;
+      margin:0px;
+  }
+
+  p.content 
+  {
+      margin-left:10px;
+      margin-right:10px;
+  }
+
+  a.content 
+  { 
+      color: blue; 
+      text-decoration: underline; 
+   }
+ a.content:hover { color: blue; }
+ 
+ 
+ #fits	
+ { 
+     text-decoration: none;
+     color:#000000;
+     
+  }
+  
+  #fits a
+  {    
+     text-decoration: none;
+     color:#000000;
+     font-weight:bold;
+     font-size:11pt;
+     top:10px; 
+     left:10px;
+  }
+
+/* sections in the Explore tool */
+#metadata
+{
+      /*background-color:pink;*/
+      width:625px;
+}
+    #metadata h1
+    {      
+        color:#000086;
+        margin:2px;
+    }
+    #metadata input
+    {
+        position:relative;
+        top:-4px;
+    }
+    #metadata h2
+    {      
+        margin:2px;
+    }
+
+#imaging
+{
+    /*background-color:orange;*/
+    border-top:thick solid black;
+    border-bottom:thick solid black;
+    width:625px;
+    margin-top:3px;
+}
+
+    #imaging h3
+    {
+      margin:3px;
+    }
+#spectro
+{
+    /*background-color:orange;*/
+    border-top:thick solid black;
+    width:625px;
+    margin-top:3px;
+}
+    #spectro h3
+    {
+        margin:3px;
+    }
+
+    #spectro .infobox 
+    {
+        position:relative;
+        top:-26px;
+        left:150px;
+        width:535px;
+        padding-top:0px;
+        padding-bottom:0px;
+        margin-bottom:-45px;
+    }
+        #spectro .infobox table
+        {
+            position:relative;
+            top:-11px;
+        }
+        #spectro .infobox td
+        {
+            padding:0px;
+            margin:0px;
+        }
+
+#crossid
+{
+    display:none;
+    width:625px;
+    margin-top:3px;
+}
+
+    #crossid.shown {
+        display:block;
+    }
+
+    crossid.hidden {
+        display:none;
+    }
+
+#irspec
+{
+    border-top:thick solid black;
+    width:800px;
+    margin-top:3px;
+}
+    #irspec h3
+    {
+        margin:3px;
+    }
+    #irspec .target
+    {
+        float:right;
+        color:#000086;
+    }
+
+#visits 
+{
+    display:none;
+    margin-top:3px;
+    margin-bottom:10px;
+}
+
+    #visits.shown {
+        display:block;
+    }
+
+    visits.hidden {
+        display:none;
+    }
+
+.irspeclink
+{
+    position:relative;
+/*    top:-40px;*/
+    width:540px;
+  /*  margin-bottom:-40px; */
+    vertical-align:top;
+    font-size:large;
+    width:400px;
+}
+
+
+#manga
+{
+    /*background-color:orange;*/
+    border-top:thick solid black;
+    width:625px;
+    margin-top:3px;
+}
+
+#manga h3
+{
+    margin:3px;
+}
+
+.sectionlabel 
+{
+    margin-top:3px;
+    margin-bottom:3px;
+    margin-left:3px;
+}
+
+.showinglink, .hidinglink {
+    color:blue;
+    text-decoration:underline;
+}
+    
+.showinglink {
+    display: inline;
+}
+    a.showinglink:hover {
+        color:blue !important;
+        text-decoration:underline;
+    }
+
+.hidinglink {
+    display: none;
+}
+    a.hidinglink:hover {
+        color:blue !important;
+        text-decoration:underline;
+    }
+
+.nodatafound 
+{
+    color:red;
+    font-weight:bold;
+}
+
+
+
+.tooltip{
+    display: inline;
+    position: relative;
+}
+
+
+.broken_link, a.broken_link {
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+    pointer-events: none;
+    cursor: not-allowed;
+}
+
+.comingsoon {
+    display: inline-block;
+    margin: 2px;
+}
+
+.comingsoon:after {
+    padding: 1px;
+    content: "Coming Soon";
+    font-size: .6em;
+    vertical-align: top;
+    color: black;
+    background-color: #EEE5FB;
+    border: solid 1px black;
+    border-radius: 4px;
+}
+
+#poweredby
+{
+    z-index:9999 !important;
+    margin-left:0px;
+    text-align:center;
+    padding-top:10px;
+    padding-bottom:10px;
+}
+
+    #poweredby img {
+        width:72px;
+        height:87px;
+        margin-top:6px;
+    }
+

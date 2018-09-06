@@ -1,0 +1,43 @@
+#content h1, #content h2, #content h3, #content h4, #content h5, #content ul, #content p 
+{ 	COLOR: #000000;
+	FONT-FAMILY: verdana,helvetica,sans-serif 
+} 
+
+#content A
+{
+    COLOR: #0033cc;
+    FONT-FAMILY: verdana,helvetica,sans-serif;
+	text-decoration:none;
+}
+
+#content a:visited
+{
+	COLOR: #663399;
+}
+
+#content a:hover {
+	COLOR:#DD9900;
+}
+
+
+#content td 
+{	FONT-FAMILY: arial,helvetica,sans-serif;
+	FONT-SIZE: 12pt;
+}
+
+#content em
+{
+	FONT-STYLE: italic;
+	FONT-WEIGHT: bold;
+	COLOR: #FF0000;
+}
+
+#content li
+{
+	padding-bottom: 6px;
+}
+
+#content .q {FONT-WEIGHT: 800; FONT-STYLE: italic;}
+#content .c {FONT-FAMILY: arial,helvetica,sans-serif;FONT-SIZE: 10pt;}
+#content .s {FONT-FAMILY: arial,helvetica,sans-serif;FONT-SIZE: 8pt;}
+#content .h {FONT-FAMILY: arial,helvetica,sans-serif;FONT-SIZE: 14pt;FONT-WEIGHT:800;}

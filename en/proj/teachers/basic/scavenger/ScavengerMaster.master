@@ -1,0 +1,10 @@
+﻿<%@ Master Language="C#" MasterPageFile="../../TeachersMaster.master" AutoEventWireup="true" CodeBehind="ScavengerMaster.master.cs" Inherits="SkyServer.Proj.Teachers.Basic.Scavenger.ScavengerMaster" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="TeachersContent" runat="server">
+<p />
+<% 
+    ProjGutter.makeGutter(sgselect, sgutter);
+%>
+    <asp:ContentPlaceHolder ID="ScavengerContent" runat="server">
+    
+    </asp:ContentPlaceHolder>
+</asp:Content>

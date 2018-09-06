@@ -1,0 +1,49 @@
+<html>
+<head><title>Answers to Practice 1-2</title>
+</head>
+
+<script>
+function done() {
+	window.close();
+}
+</script>
+
+<body bgcolor=darkred>
+
+<h1><font color=white>Answers</font></h1>
+
+<p><font color=yellow><b>Practice 1.</b></font></p>
+<p><font color=white>
+    <pre>
+    SELECT
+        ra, dec
+    FROM
+        specObj
+    WHERE
+        ra BETWEEN 140.25 and 140.75 
+        AND dec BETWEEN 20.25 and 20.75
+    </pre>
+</font></p>
+
+<p><font color=white>The query returns 89 results, compared to 328 for the previous query.</font></p>
+
+<p><font color=yellow><b>Practice 2.</b></font></p>
+<p><font color=white>
+    <pre>
+    SELECT
+        ra, dec, bestobjID
+    FROM
+        specObj
+    WHERE
+        ra BETWEEN 140.25 and 140.75 
+        AND dec BETWEEN 20.25 and 20.75 
+        AND class = 'galaxy'
+    </pre>
+</font></p>
+
+<p><font color=white>The query returns 41 results, meaning 41 of the 89 spectrally-measured 
+objects in this region are galaxies.</font></p>
+
+<p><a href="javascript:done()"><font color=gold>Done</font></a></p>
+</body>
+</html>

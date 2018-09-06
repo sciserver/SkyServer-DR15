@@ -1,0 +1,62 @@
+<?xml version="1.0"?>
+
+<!--
+  For more information on how to configure your ASP.NET application, please visit
+  http://go.microsoft.com/fwlink/?LinkId=169433
+  -->
+
+<configuration>
+    <system.web>
+        <compilation debug="true" targetFramework="4.0" />
+    </system.web>
+  <appSettings>
+    <add key="PageInspector:ServerCodeMappingSupport" value="Disabled" />
+    
+    <add key="solarConnectionString" value="User ID=*****;Password=*****;Data Source=sdssdb002;Database=SDSS_EPO"/>
+    <add key="connectionString" value="User ID=*****;Password=*****;Data Source=SDSS3T;"/>
+    <add key="releaseNumber" value="12"/>
+    <add key="database" value="BESTDR12"/>
+    <add key="siteName" value=""/>
+    <add key="siteIcon" value="../images/flag_us.gif"/>
+    
+    <add key="wsBaseURL" value="http://skyservice.pha.jhu.edu/"/>
+    <add key="wsSpechome" value="http://www.voservices.net/spectrum/"/>
+    <add key="wsFilterhome" value="http://www.voservices.net/filter/"/>
+    
+    <add key="eqSearchRadius" value="0.75"/>
+    <add key="access" value="public"/>
+    <add key="dasUrlBase" value="http://dr12.sdss3.org/"/>
+    <add key="visualRA" value="132.749"/>
+    <add key="visualDec" value="11.656"/>
+    <add key="visualScale" value="0.79224"/>
+    <add key="exploreDefault" value="1237668296598749280"/>
+    <add key="sdssUrlBase" value="http://www.sdss.org/"/>
+    <add key="logURL" value="http://skyserver.sdss.org/log/en/traffic/"/>
+    <add key="casJobs" value="http://skyserver.sdss.org/CasJobs/"/>
+    <add key="defaultSpRerun" value="26"/>
+    <add key="skyVersion" value="2"/>
+    <add key="epoHelp" value="raddick@pha.jhu.edu"/>
+    <add key="urlSolarSystemProj" value="http://skyserver.sdss.org/solarsystem/"/>
+    <add key="urlProjRegister" value="http://skyserver.pha.jhu.edu/register/"/>
+    <add key="apogeeSpectrumLink" value="http://dr12.sdss3.org/irSpectrumDetail" />
+    <add key="apogeeFitsLink" value="http://dr12.sdss3.org/sas/dr12/apogee/spectro/redux/" />
+    <add key="helpdesk" value="helpdesk@sdss3.org"/>
+    <add key="smtp" value="mail.pha.jhu.edu"/>    
+
+    <!-- Timeouts and limits -->
+    <add key="defTimeout" value="600"/>
+    <add key="qaTimeout" value="3600"/>
+    <add key="sqlTimeout" value="600"/>
+    <add key="crossidTimeout" value="1800"/>
+    <add key="crossidRadius" value="3.0"/>
+    <add key="formTimeout" value="600"/>
+    <add key="chartTimeout" value="600"/>
+    <add key="emacsTimeout" value="600"/>
+    <add key="rowLimit" value="500000"/>
+    <add key="emacsRowLimit" value="500000"/>
+    <add key="queriesPerMinute" value="60"/>
+  </appSettings>
+  <system.webServer>
+    <handlers accessPolicy="Read, Script" />
+  </system.webServer>
+</configuration>

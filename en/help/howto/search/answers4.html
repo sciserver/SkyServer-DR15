@@ -1,0 +1,83 @@
+<html>
+<head><title>Answers to Practice 7-9</title>
+</head>
+
+<script>
+function done() {
+	window.close();
+}
+</script>
+
+<body bgcolor=darkred>
+
+<h1><font color=white>Answers</font></h1>
+
+<p><font color=yellow><b>Practice 7.</b></font>
+<font color=white>&nbsp;Use the following query:</font></p>
+
+<p><font color=white>
+<pre>
+    SELECT 
+        min(dec),max(dec)
+    FROM
+        specObj
+</pre>        
+</p>
+
+<p>The northernmost object (maximum dec) is at dec = 84.852144; the southernmost object 
+(minimum dec) at dec = -19.702714</p>
+
+<p><font color=yellow><b>Practice 8.</b></font>
+<font color=white>To find the galaxy with the smallest redshift, use the 
+following query:</font></p>
+
+<p><font color=white>
+<pre>
+    SELECT top 1
+        p.objID, s.z as redshift, p.u, p.r, p.g, p.i, p.z
+    FROM photoObj p
+    JOIN specObj s ON s.bestObjID = p.objID
+    WHERE 
+        s.class = 'galaxy'
+        and s.z > 0 
+        and p.objID <> 0 
+        and s.zWarning = 0
+    ORDER BY s.z
+</pre>
+</font></p>
+
+<p>The query returns <a href="../../../tools/explore/summary.aspx?id=0x112d14c220880060&spec=0x28e84d919a006800&apid=apogee.n.s.s3.4128.2M13102744+1826172">
+    ObjID = 1237662666425827520</a> at z = 4.44 x 10<sup>-7</sup>. 
+    Using the equation cz = H<sub>0</sub>d, the galaxy is at a 
+    distance of about 800,000 light-years. Comparing the distance 
+    to this galaxy to the Andromeda and Whirlpool Galaxies, 
+    the distance seems reasonable.</p> 
+
+<p><font color=yellow><b>Practice 9.</b></font>
+<font color=white>Use the following query:</font></p>
+
+<p><font color=white>
+<pre>
+    SELECT 
+        p.run, p.camcol, p.field, count(s.z) as count, avg(s.z) as average
+    FROM photoObj p
+    JOIN specObj s ON s.bestObjID = p.objID
+    WHERE 
+        s.class = 'galaxy'
+        and p.run = 5112 
+        and camcol = 1 
+    GROUP BY 
+        p.run,p.camcol,p.field
+    ORDER BY
+        avg(s.z) desc
+</pre>
+</font></p>
+
+<p>The field in run 5112 camcol 1 with the highest average redshift 
+    is field 5112-1-369. It includes three spectrally measured galaxies 
+    with average redshifts of about 0.68.</p>
+
+
+<p><a href="javascript:done()"><font color=gold>Done</font></a></p>
+</body>
+</html>

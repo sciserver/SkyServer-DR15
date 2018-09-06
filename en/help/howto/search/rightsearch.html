@@ -1,0 +1,50 @@
+<html>
+<head><title>The Right Search</title>
+</head>
+
+<script>
+function done() {
+	window.close();
+}
+</script>
+
+<body bgcolor=lightblue>
+
+<h1><font color=black>The Right Search</font></h1>
+
+<p><font color=black>Here are the magic words that let you search for all bright blue galaxies:</font></p>
+
+<p><font color=black>select top 10 p.objid, p.ra, p.dec, p.g, p.r<br>
+from photoObj p<br />
+    join specObj s on s.bestobjid = p.objid<br />
+where p.g-p.r < 0<br>
+and p.g < 15<br>
+and p.r < 15<br>
+and s.class = 2</font></p>
+<p><font color=black>Don't worry, you'll learn what each of these terms means later in the tutorial.</font></p>
+
+<a name="tools"></a>
+<p><font color=black>If you enter these words in the <a href="#tools" onclick="window.open('../../../tools/search/sql.aspx','tools');">
+SQL search tool</a>, the tool will return 10 results, with the object ID below.
+Click on the links to see each of these galaxies in the Object Explorer. Which ones do you think 
+    really are bright blue galaxies, and which ones do you think are data artifacts?</p>
+
+<p>
+
+<a href="../../../tools/explore/obj.aspx?id=1237649768642642692" target="data">1237649768642642692</a><br />
+<a href="../../../tools/explore/obj.aspx?id=1237651735237755016" target="data">1237651735237755016</a><br />
+<a href="../../../tools/explore/obj.aspx?id=1237652899158425651" target="data">1237652899158425651</a><br />
+<a href="../../../tools/explore/obj.aspx?id=1237657401872285773" target="data">1237657401872285773</a><br />
+<a href="../../../tools/explore/obj.aspx?id=1237657610728112201" target="data">1237657610728112201</a><br />
+<a href="../../../tools/explore/obj.aspx?id=1237657774457618550" target="data">1237657774457618550</a><br />
+<a href="../../../tools/explore/obj.aspx?id=1237658203969880126" target="data">1237658203969880126</a><br />
+<a href="../../../tools/explore/obj.aspx?id=1237658313478242321" target="data">1237658313478242321</a><br />
+<a href="../../../tools/explore/obj.aspx?id=1237658492284371116" target="data">1237658492284371116</a><br />
+<a href="../../../tools/explore/obj.aspx?id=1237658613058961438" target="data">1237658613058961438</a><br />
+
+</p>
+
+
+<p><font color=black><a href="javascript:done()">Done</a></font></p>
+</body>
+</html>

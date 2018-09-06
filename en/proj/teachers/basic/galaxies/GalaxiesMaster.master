@@ -1,0 +1,10 @@
+﻿<%@ Master Language="C#" MasterPageFile="../../TeachersMaster.master" AutoEventWireup="true" CodeBehind="GalaxiesMaster.master.cs" Inherits="SkyServer.Proj.Teachers.Basic.Galaxies.GalaxiesMaster" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="TeachersContent" runat="server">
+<p />
+<% 
+    ProjGutter.makeGutter(sgselect, sgutter);
+%>
+    <asp:ContentPlaceHolder ID="GalaxiesContent" runat="server">
+    
+    </asp:ContentPlaceHolder>
+</asp:Content>

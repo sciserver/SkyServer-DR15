@@ -1,0 +1,184 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<title>JavaScript and Flash Integration Kit</title>
+</head>
+
+<body>
+<h1>JavaScript and Flash Integration Kit (Beta) </h1>
+<a name="top"></a>
+<ul>
+<li><a href="#about">About this Project</a></li>
+<li><a href="#installation">Installation</a></li>
+<li><a href="#usage">How to Use</a></li>
+<li><a href="#requirements">Requirements</a></li>
+<li><a href="#issues">Known Issues</a></li>
+</ul>
+<a name="about"></a>
+<h2>About this Project</h2>
+<p>The JavaScript and Flash Integration Kit allows developers to get the best of
+the Flash and HTML worlds by enabling JavaScript to invoke ActionScript functions,
+and vice versa. All major data types can be passed between the two environments including:</p>
+<ul>
+    <li>objects</li>
+    <li>arrays</li>
+    <li>strings</li>
+    <li>numbers</li>
+    <li>dates</li>
+    <li>booleans</li>
+    <li>nulls</li>
+    <li>undefined</li>
+</ul>
+<p>Additionally, the JavaScript and Flash Integration Kit works on all major browsers and platforms
+(see <a href="#requirements">requirements</a> below for details).</p>
+<p>You can find the latest information and download the latest version from:</p>
+<p><a href="http://www.macromedia.com/go/flashjavascript">http://www.macromedia.com/go/flashjavascript</a></p>
+<p>This project was created and written by <a href="http://weblogs.macromedia.com/cantrell">Christian
+Cantrell</a> and <a href="http://weblogs.macromedia.com/mesh">Mike Chambers</a> at
+<a href="http://www.macromedia.com">Macromedia</a>.</p>
+<p><a href="#top">Top</a></p>
+<a name="installation"></a>
+<h2>Installation</h2>
+<p>Installation of the JavaScript and Flash Integration Kit is very straightforward.
+Copy the JavaScriptFlashGateway.js and JavaScriptFlashGateway.swf files from the
+installation directory into your web root. They can go anywhere,
+but we recommend putting them in a location where they can be used by multiple projects.</p>
+<p>Installation of the Flash part of the kit requires copying the library files
+  from source/flash/actionscript into your Flash Authoring or Flex classpath:</p>
+<p>com/macromedia/javascript/JavaScriptProxy.as<br />com/macromedia/javascript/JavaScriptSerializer.as</p>
+<p>Make sure to maintain the directory structure when moving the files into your
+  classpath.</p>
+<p><a href="#top">Top</a></p>
+<a name="usage"></a>
+<h2>How to Use</h2>
+<h3>Calling an ActionScript function from JavaScript</h3>
+<p>To call an ActionScript function from JavaScript, make sure the JavaScriptFlashGateway.js
+is  included in your HTML page like this:</p>
+<p><code>&lt;script type=&quot;text/javascript&quot; src=&quot;/path/to/JavaScriptFlashGateway.js&quot;&gt;&lt;/script&gt;</code></p>
+<p>The JavaScriptFlashGateway.js file contains a class called FlashProxy which
+  is used to proxy function calls between Flash and JavaScript. The FlashProxy
+  and the Flash content you want to invoke functions on must share a unique ID
+  so that the FlashProxy knows which Flash content on the page to invoke functions
+  on. The easiest way to create a unique ID is to use a timestamp. Inside script
+  tags on your page, create a unique ID like this:</p>
+<p><code>var uid = new Date().getTime();</code></p>
+<p>Now, create an instance of the FlashProxy JavaScript class and pass in the unique
+ID you just created, and the path to the JavaScriptFlashGateway.swf file, like this:</p>
+<p><code>var flashProxy = new FlashProxy(uid, '/path/to/JavaScriptFlashGateway.swf');</code></p>
+<p>When you add your Flash content to your page, you have to pass in the same
+  unique ID that you passed into the constructor of the FlashProxy using flashvars.
+  The JavaScriptFlashGateway.js file contains an easy way to generate Flash tags
+  and add the necessary flashvars, like this:</p>
+<code>
+<pre>&lt;script type=&quot;text/javascript&quot;&gt;
+    var tag = new FlashTag('/path/to/flashContent.swf', 300, 300); // last two arguments are height and width
+    tag.setFlashvars('lcId='+uid);
+    tag.write(document);
+&lt;/script&gt;</pre>
+</code>
+<p>The unique ID is passed into your Flash content through the lcId Flash variable.
+Now, you are ready to invoke ActionScript functions from JavaScript using your FlashProxy
+instance, like this:</p>
+<p><code>flashProxy.call('myActionScriptFunction', 'my string', 123, true, new Date(), null);</code></p>
+<p>The first argument in the code above is the name of the ActionScript function
+you want to invoke, and any remaining arguments are passed as arguments to the
+  function you are invoking within Flash. Supported data types include objects,
+  arrays, strings, dates, numbers, booleans, nulls, and undefined. </p>
+<h3>Receiving a function call from Flash within JavaScript</h3>
+<p>You don't have to do anything special in your JavaScript code in order to receive
+function calls from Flash. As long as the JavaScriptFlashGateway.js file is included
+in the page, JavaScript functions can be invoked from Flash with any number of arguments
+using the technique described below.</p>
+<h3>Calling a JavaScript function from ActionScript</h3>
+<p>Again, make sure JavaScriptFlashGateway.js is included in the HTML page that contains
+the JavaScript function you want to invoke.</p>
+<p>Import the JavaScriptProxy class into your Flash project:</p>
+<p><code>import com.macromedia.javascript.JavaScriptProxy;</code></p>
+<p>You then create an instance of the JavaScriptProxy class like this:</p>
+<p><code>var proxy:JavaScriptProxy = new JavaScriptProxy();</code></p>
+<p>You can call a JavaScript function in two ways.</p>
+<p>First, you can use the call API like this:</p>
+<p><code>proxy.call(&quot;javaScriptMethodName&quot;, &quot;arg1&quot;, new Object());</code></p>
+<p>The first argument is the name of the function to call in JavaScript. Any
+  additional arguments will be passed as arguments to the JavaScript function
+  being called.</p>
+<p>You can also call methods directly on the JavaScriptProxy class, and they
+  will be proxied to JavaScript. For Example:</p>
+<p><code>proxy.javaScriptMethodName(&quot;arg1&quot;, new Object());</code></p>
+<h3>Receiving a function call from JavaScript within Flash </h3>
+<p>In order to allow JavaScript to call functions within your Flash content,
+  you need to create an instance of the JavaScriptProxy class and specify the
+  object that functions will be proxied to.</p>
+<p><code>var proxy:JavaScriptProxy = new JavaScriptProxy(_root.lcId, this);</code></p>
+<p>The constructor takes two arguments. The first is the unique id passed into
+  the Flash content from the HTML page (see above). The second is the object
+  or class instance that function calls from JavaScript will be proxied to. Note:
+  the arguments are only required if your Flash content will receive function
+  calls from JavaScript.</p>
+<p>This is all of the code required. Any JavaScript calls will be passed to the
+  object specified in the constructor parameter.</p>
+<p><a href="#top">Top</a></p>
+<a name="requirements"></a>
+<h2>Requirements</h2>
+<p>The JavaScript Flash Integration Kit requires Flash Player version 6r65, and has
+been tested on the following browsers:</p>
+<ul>
+<li> Windows IE 6.0</li>
+<li>Windows Firefox 1.0</li>
+<li>Windows Opera 8.0</li>
+<li>Macintosh Opera 8.0</li>
+<li>Macintosh Firefox 1.0</li>
+<li>Safari 1.2.4 and 2.0 </li>
+<li>Linux Firefox 1.1</li>
+</ul>
+<p><a href="#top">Top</a></p>
+<a name="issues"></a>
+<h2>Known Issues</h2>
+<ol><li>Undefined object properties in JavaScript may not be serialized and sent to ActionScript
+unless they are explicitly defined as undefined. If the variable is simply not
+defined at all, the property may be stripped out.</li>
+<li>If you are using the debug player, you may find that the calls between JavaScript
+and Flash are slow. The calls occur very quickly on other platforms, in other browsers,
+and with the standard Flash Player.</li>
+<li>You can not pass objects or arrays that contain circular references. Circular
+  references in both JavaScript and ActionScript will cause infinite loops. In
+  other words, if an object has a reference to itself as a property, the serialization
+code will get stuck in an infinite loop.</li></ol>
+<p><a href="#top">Top</a></p>
+<p>This product includes software developed by Macromedia, Inc. (<a href="http://www.macromedia.com">http://www.macromedia.com</a>).</p>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+<br/>
+</body>
+</html>

@@ -1,0 +1,10 @@
+﻿<%@ Master Language="C#" MasterPageFile="../../../HomeMaster.master" AutoEventWireup="true" CodeBehind="SearchHowtoMaster.master.cs" Inherits="SkyServer.Help.Howto.SearchHowtoMaster" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
+</asp:Content>
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+<p />
+<% SearchHowtoGutter.makeGutter(gselect, gutter); %>
+    <asp:ContentPlaceHolder ID="SearchHowtoContent" runat="server">
+    
+    </asp:ContentPlaceHolder>
+</asp:Content>

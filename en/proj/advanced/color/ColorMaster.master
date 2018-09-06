@@ -1,0 +1,10 @@
+﻿<%@ Master Language="C#" MasterPageFile="../../ProjMaster.master" AutoEventWireup="true" CodeBehind="ColorMaster.master.cs" Inherits="SkyServer.Proj.Advanced.Color.ColorMaster" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="ProjContent" runat="server">
+<p />
+<% 
+    ProjGutter.makeGutter(sgselect, sgutter);
+%>
+    <asp:ContentPlaceHolder ID="ColorContent" runat="server">
+    
+    </asp:ContentPlaceHolder>
+</asp:Content>

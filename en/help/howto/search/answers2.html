@@ -1,0 +1,48 @@
+<html>
+<head><title>Answers to Practice 3-4</title>
+</head>
+
+<script>
+function done() {
+	window.close();
+}
+</script>
+
+<body bgcolor=darkred>
+
+<h1><font color=white>Answers</font></h1>
+
+<p><font color=yellow><b>Practice 3.</b></font></p>
+<p><font color=white>
+<pre>
+    select
+        objID, ra, dec, u, g, r, i, z
+    from
+        galaxy
+    where
+        ra BETWEEN 140.9 and 141.1 
+        AND g < 18.0 
+        AND u - g > 2.2
+</pre>
+</font></p>
+
+<p><font color=yellow><b>Practice 4.</b></font></p>
+<p><font color=white>
+<pre>
+    select
+        bestObjID, ra, dec, z
+    from
+        specObj
+    where
+        class='qso' 
+        AND z > 4.5 
+        AND zWarning = 0
+</pre>
+
+</font></p>
+
+<p><font color=white>The query returns 1,695 quasars.</font></p>
+
+<p><a href="javascript:done()"><font color=gold>Done</font></a></p>
+</body>
+</html>

@@ -1,0 +1,367 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="QuickLook.Master.cs" Inherits="SkyServer.Tools.QuickLook.ObjectQuickLook" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head id="Head1" runat="server">
+    <link href="../../tools.css" rel="stylesheet" type="text/css" />
+    <link href="../../../alerts.css" rel="stylesheet" type="text/css" />
+    <style>
+      .hh	 {font-family: arial,helvetica,sans-serif;font-weight:bolder;font-size:10pt;}
+      .isize {width: 150px;font-size:10pt;font-family:courier;}
+      .qsize {width: 78px;font-size:10pt;font-family:courier;}
+      .aa    { color: #aaaaff; font-weight: bold; font-size:12pt;}
+      .bb    { color: #aaaaff; font-weight: bold; font-size:10pt;}
+      td	 {font-size:10pt;}
+      #check  {position: absolute; left:  0px; top: 0px;visibility:hidden;width:12px;}
+      #toc   {position:absolute;top:70px;left:10px;}
+      #content {position:absolute;top:0px;left:135px;background-color:White;}
+    </style>
+    
+<script type="text/javascript" src="../chart/naviClass.js"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
+<script type="text/javascript" language="javascript">
+    //#check {visibility:hidden; }
+    var search = false;
+    var check;
+
+    function init() {
+        check = new Div("check", 124, 186);
+        //check.show();
+        check.hide();
+    }
+
+    function gotochart(ra, dec) {
+        var s = "../chart/chart.aspx?ra=" + ra + "&dec=" + dec;
+        var w = window.open(s, "NAVIGATE");
+        w.focus();
+    }
+    function gotonavi(ra, dec) {
+        var s = "../chart/navi.aspx?ra=" + ra + "&dec=" + dec;
+        var w = window.open(s, "NAVIGATE");
+        w.focus();
+    }
+
+    function setSDSS(id) {
+        var s = "setSDSS.aspx?id=" + id;
+        var w = window.open(s, "POPUP", "width=240,height=220");
+        w.focus();
+    }
+    function setEq(ra, dec) {
+        var s = "setEq.aspx?ra=" + ra + "&dec=" + dec;
+        var w = window.open(s, "POPUP", "width=240,height=220");
+        w.focus();
+    }
+    function setId(id) {
+        var s = "setId.aspx?id=" + id;
+        var w = window.open(s, "POPUP", "width=240,height=220");
+        w.focus();
+    }
+    function setPlfib(sid) {
+        var s = "setPlfib.aspx?sid=" + sid;
+        var w = window.open(s, "POPUP", "width=240,height=220");
+        w.focus();
+    }
+    function loadQuickLook(id) {
+
+        parent.OMAIN.document.location = "quicklook.aspx?id=" + id;
+    }
+    function showNotes() {
+        var s = "../chart/book.aspx";
+        var w = window.open(s, "POPUP");
+        w.focus();
+    }
+    function framePrint() {
+        window.print();
+        /*
+        var pr = (window.print) ? 1 : 0;
+        var da = (document.all) ? 1 : 0;
+        var mac = (navigator.userAgent.indexOf("Mac") != -1);
+        if (pr && da) {		// IE5
+            parent.OMAIN.focus();
+            window.print();
+        } else if (pr) {	// NS4
+            parent.OMAIN.print();
+        } else {
+            alert("Sorry, your browser does not support this feature");
+        }
+        */
+    }
+    function saveBook(id) {
+        /*
+        var url = "../chart/book.aspx?add=" + id;
+        top.frames.HIDDEN.location.href = url;
+        toggleElement('check', 1);
+        */
+        document.getElementById('check2').style.display = "inline";
+        var url = "../chart/book.aspx?add=" + id;
+        var frame = document.getElementById("test");
+        frame.src = url;
+        //check.show();
+    }
+
+    function getid(id) {
+        var link = "summary.aspx?id=" + id;
+        return link;
+    }
+
+    function toggleElement(divID, state) // 1 visible, 0 hidden
+    {
+        // I got this function from the Internet:
+        // http://www.geocities.com/technofundo/tech/js/showhide.html
+        // Jordan Raddick, 09/20/07, Baltimore
+        //
+        // "divID" is the div that needs to be visible or hidden. Should be passed in as a string.
+        // "state" is whether it is visible or hidden: integer, 1 means visible, 0 means hidden
+        //
+
+        if (document.layers)	   //NN4+
+        {
+            document.layers[divID].visibility = state ? "show" : "hide";
+        }
+        else if (document.getElementById)	  //gecko(NN6) + IE 5+
+        {
+            var obj = document.getElementById(divID);
+            obj.style.visibility = state ? "visible" : "hidden";
+        }
+        else if (document.all)	// IE 4
+        {
+            document.all[szDivID].style.visibility = state ? "visible" : "hidden";
+        }
+    }
+
+    function toggleSearch() {
+        if (search) {
+            document.getElementById("search").style.display = "none";
+            document.getElementById("content").style.position = "absolute";
+            document.getElementById("content").style.top = "0px";
+            document.getElementById("content").style.left = "135px";
+            search = false;
+        }
+        else {
+            document.getElementById("content").style.position = "absolute";
+            document.getElementById("content").style.top = "100px";
+            document.getElementById("content").style.left = "135px";
+            document.getElementById("search").style.display = "block";
+            search = true;
+        }
+    }
+
+    function press_ok(kind) {
+        var windowPage = "summary.aspx";
+        var f = (document.layers) ? document.ctrl.document.forms[0] : document.forms[0];
+        switch (kind) {
+            case 'name':
+                //callNameResolver();
+                break;
+            case "objid":
+                window.location = windowPage + '?id=' + f.searchObjID.value;
+                break;
+            case "radec":
+                setra()
+                setdec()
+                window.location = windowPage + '?ra=' + f.searchRA.value + '&dec=' + f.searchDec.value;
+                break;
+            case "sdss":
+                var a = String(f.searchSDSS.value).split("-");
+                if (a.length != 5) {
+                    alert('The SDSS Id has 5 parts,\n Run-Rerun-Camcol-Field-Obj\n');
+                    return false;
+                }
+                //var rerun = Number(a[1]) + 2048;  // skyversion=1
+                //var rerun = Number(a[1]) + 4096;  // skyversion=2
+                //var run = Number(a[0]);
+                //var camcol = Number(a[2]);
+                //var field = Number(a[3]);
+                //var obj = Number(a[4]);
+                //var cf = 8192 * camcol + field;
+
+                //var s = "0x";
+                //s += padHex(rerun, 4);
+                //s += padHex(run, 4);
+                //s += padHex(cf, 4);
+                //s += padHex(obj, 4);
+
+                //window.location = windowPage + '?id=' + s //Number(s).toString(10);
+                window.location = windowPage + '?run=' + a[0] + '&rerun=' + a[1] + '&camcol=' + a[2] + '&field=' + a[3] + '&obj=' + a[4]
+                break;
+            case "specid":
+                var ID = parseFloat(f.searchSpecID.value)
+                if (isNaN(ID) || f.searchSpecID.value.indexOf("+") > -1 ) {
+                    window.location = windowPage + '?apid=' + f.searchSpecID.value;
+                }
+                else {
+                    window.location = windowPage + '?sid=' + f.searchSpecID.value;
+                }
+                break;
+            case "plfib":
+                window.location = windowPage + '?plate=' + f.searchPlate.value + '&mjd=' + f.searchMJD.value + '&fiber=' + f.searchFiber.value;
+                break;
+            default:
+                alert('Not supported');
+                break;
+        }
+
+        return false;
+    }
+
+    function setra() {
+        var s_ra = String(document.getElementById('searchRA').value);
+        var v;
+        if ($.isNumeric(s_ra)) {
+            v = s_ra;
+            v = v % 360;
+            if (v < 0) v += 360;
+
+            document.getElementById('searchRA').value = v;
+        }
+        return false;
+    }
+
+    //------------------------------------
+    // set and validate the dec value
+    //------------------------------------
+    function setdec() {
+
+        var s_dec = String(document.getElementById('searchDec').value);
+        var v;
+        if ($.isNumeric(s_dec)) {
+            v = parseFloat(s_dec);
+            if (isNaN(v)) v = 0.0;
+            //if (v<-90) v= -90;
+            //if (v>90) v= 90;
+            var OldRa = parseFloat(document.getElementById('searchRA').value)
+            if (v < -90 || v > 90) {
+                v = v % 360;					// brings dec within the circle
+                if (v < 0) {
+                    v = v + 360     // only allows positive dec values
+                }
+                if (v > 90 & v < 270) { // if dec is at the other side of the poles
+                    document.getElementById('searchRA').value = (OldRa + 180) % 360 // go 1/2 way around the globe
+                    v = 180 - v
+                }
+                if (v >= 270) { // if dec is at this side from the south pole
+                    v = v - 360
+                }
+            }
+
+            document.getElementById('searchDec').value = v;
+        }
+        return false;
+    }
+
+
+    function resolveName() {
+        var name = $('#searchName').val();
+        $.ajax({
+            type: "GET",
+            url: "../Resolver.ashx?name=" + name,
+            success: function (response) {
+                if (response.indexOf("Error:") == 0) {
+                    alert(response);
+                }
+                else {
+                    var s = response.split('\n');
+                    var windowPage = "summary.aspx";
+                    window.location = windowPage + '?ra=' + s[1].substring(4) + '&dec=' + s[2].substring(5);
+
+                }
+            },
+            error: function () {
+                alert("Error: Could not resolve name.");
+            }
+        });
+    }
+
+
+</script>
+    <title></title>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+</head>
+<body onload="init()" leftmargin="8" topmargin="8" class="quicklook">
+    <form id="form2" runat="server">
+
+      <table border="0" cellspacing="0" cellpadding="2" bgcolor="black">
+	  <tr>
+		<td width="40"><a href="<%= enUrl %>" target="_top"><img src="images/sdssIVlogo.png" border=0 height="40"></a></td>
+		<td class="title" align="left" width="<%= tabwidth-60 %>">&nbsp;&nbsp;<%= globals.Release %></td>
+	  </tr>
+      </table>
+
+        <div id='check' ><img src='../chart/images/checkmark.gif' width="12" height="10"></div>
+
+        <div id="search" style="display:none;">
+          <table>
+            <tr>
+              <td width="120px" align="center"><h2>Search by</h2><input type="button" onclick="toggleSearch()" value="Hide"></input></td>
+              <td>
+                <table>
+                  <tr><td align="right" class="s">Name:</td><td><input type="text" id="searchName" name="searchName" value="ACO  2255"></input></td><td><input type="button" onclick="resolveName()" value="Find"/></td></tr>
+                  <tr><td align="right" class="s">RA/Dec:</td><td><input type="text" size="8" id="searchRA" name="searchRA" value="197.614455635"></input>/<input type="text" size="8" id="searchDec" name="searchDec" value="18.438168849"></input></td><td><input type="button" onclick="press_ok('radec')" name="searchRADECbutton" value ="Go"></input></td></tr>
+                   <tr><td align="right" class="s">ObjID:</td><td><input type="text" name="searchObjID" value="1237668296598749280"></input></td><td><input type="button" onclick="press_ok('objid')" value="Go"></input></td></tr>
+                </table>
+               </td>
+               <td>
+                <table>
+                <tr><td align="right" class="s">SpecObjID, apstar_id or apogee_id:</td><td><input type="text" name="searchSpecID" value="2947691243863304192"></input></td><td><input type="button" onclick="press_ok('specid')" value="Go"></input></td></tr>
+                <tr><td align="right" class="s">5-part SDSS:</td><td><input type="text" name="searchSDSS" value="5314-301-1-136-96"></input></td><td><input type="button" onclick="press_ok('sdss')" value="Go"></input></td></tr>
+                <tr><td align="right" class="s">Plate-MJD-Fiber:</td><td><input type="text" size="4" name="searchPlate" value="2618"></input>-<input type="text" size="4" name="searchMJD" value="54506"></input>-<input type="text" size="4" name="searchFiber" value="310"></input></td><td><input type="button" onclick="press_ok('plfib')" value="Go"></input></td></tr>
+                </table>
+               </td>
+              </tr>
+            </table>
+        </div>
+
+    <div id="toc" >
+      <table width="110" cellspacing=0 cellpadding=0>
+	    <tr><td class="s" align="right"><hr width="90"></td></tr>
+	    <tr><td><a class="quicklook" target="_top" href='<%=hrefs.Quicklook%>' ONMOUSEOVER="this.T_WIDTH='140';return escape('View the current object in this Quick Look tool.')">Summary</a></td></tr>
+	    <tr><td class="s" align="right"><hr width="90"></td></tr>
+	    <tr><td align="left"><a class="quicklook" target="tools" href='<%=hrefs.Explore %>' ONMOUSEOVER="this.T_WIDTH='140';return escape('Study this object in more depth with the Explore tool.')">Explore</a></td></tr>	
+	    <tr><td align="right"><hr width="90"></td></tr>
+
+        <tr><td class="med"><a id="searchLabel" href="#" onclick="toggleSearch();" value="Hide" ONMOUSEOVER="this.T_WIDTH='140';return escape('Search for specific objects.')">Search</a></td></tr>
+        <tr><td align="right"><hr width="90"></td></tr>
+
+            <!--
+	    <tr><td><a class="quicklook" target="OMAIN" href='<%=hrefs.Search%>' ONMOUSEOVER="this.T_WIDTH='140';return escape('Use these options to search for specific objects.')">Search by</a></td></!--tr>
+	    <tr><td class="s" align="right"><a class="quicklook" href='<%=hrefs.Id%>' ONMOUSEOVER="this.T_WIDTH='140';return escape('Search by SDSS Object ID (objid).')">ObjId</a></td></tr>
+	    <tr><td class="s" align="right"><a class="quicklook" href='<%=hrefs.Eq%>' ONMOUSEOVER="this.T_WIDTH='140';return escape('Search by location (ra, dec).')">Ra,dec</a></td></tr>
+	    <tr><td class="s" align="right"><a class="quicklook" href='<%=hrefs.SDSS%>' ONMOUSEOVER="this.T_WIDTH='140';return escape('Search by SDSS run-rerun-camcol-field-obj code.')">5-part SDSS</a></td></tr>
+	    <tr><td class="s" align="right"><a class="quicklook" href='<%=hrefs.Plfib%>' ONMOUSEOVER="this.T_WIDTH='140';return escape('Search for a particular spectrum (and its matching image) by its plate number, modified Julian date of observation and number of its fiber on the plate.')">Plate-MJD-Fiber</a></td></tr>
+	    <tr><td class="s" align="right"><hr width="90"></td></tr>
+            -->
+	    <tr><td><a class="quicklook" href='<%=hrefs.ShowBook%>' ONMOUSEOVER="this.T_WIDTH='140';return escape('Save or view objects using your SkyServer notebook.')">Notes</a></td></tr>
+	    <tr><td class="s" align="right" ><div id='check2' style="display: none;"><img src='../chart/images/checkmark.gif' alt="Added to notebook" /></div><a class="quicklook" href='<%=hrefs.SaveBook%>' ONMOUSEOVER="this.T_WIDTH='140';return escape('Save this object in your SkyServer notebook.')"> Add to Notes</a></td></tr>
+        <tr><td class="s" align="right" ><a class="quicklook" href='<%=hrefs.ShowBook%>' ONMOUSEOVER="this.T_WIDTH='140';return escape('View data for any objects you have saved in your SkyServer notebook.')">Show Notes</a></td></tr>
+	    <tr><td class="s" align="right"><hr width="90"></td></tr>
+	    <tr><td align="left"><a class="quicklook" target="_blank" href='<%=hrefs.FindingChart %>' ONMOUSEOVER="this.T_WIDTH='140';return escape('Make a Finding Chart to help you view this object in a telescope.')">Finding Chart</a></td></tr>
+	    <tr><td align="right"><hr width="90"></td></tr>
+	    <tr><td><a class="quicklook" href=# onClick="<%=hrefs.Print%>"> Print </a></td></tr>
+	    <tr><td align="right"><hr width="90"></td></tr>
+	    <tr><td><span class="helplink"><a class="quicklook" target="OMAIN" href='<%=hrefs.Help%>'> Help </a></span></td></tr>
+	    <tr><td align="right" class="s"><a class="quicklook" target="OMAIN" href='<%=hrefs.Tutorial%>' ONMOUSEOVER="this.T_WIDTH='140';return escape('View the Quick Look tutorial video.')">Tutorial</a></td></tr>		
+	    <tr><td align="right" class="s"><a class="quicklook" target="OMAIN" href='<%=hrefs.Examples%>' ONMOUSEOVER="this.T_WIDTH='140';return escape('See some more examples of what you can see in Quick Look.')">Examples</a></td></tr>		
+	    <tr><td align="right"><hr width="90"></td></tr>
+        <tr>
+            <td>
+                <div id="poweredby">
+                    <b>Powered by</b><br />
+                    <img src="../../images/sciserver_logo_inverted_vertical.png" alt="SciServer" align="middle" />
+                </div>
+            </td>
+        </tr>
+      </table>
+    </div>
+    <div id="content">
+        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+        
+        </asp:ContentPlaceHolder>
+    </div>
+    </form>
+    <script language="JavaScript" type="text/javascript" src="<%= url+ "/wz_tooltip.js"%>"></script>
+    <iframe id="test" name='test' width ="0" height="0" scrolling="no"  src="../chart/blank.html"/>
+    
+</body>
+</html>

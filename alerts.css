@@ -1,0 +1,179 @@
+﻿body > div#public > div.migrationAlert {
+    width:648px;
+    padding:10px;
+    margin-top:10px;
+    margin-bottom:10px;
+    background-color:chocolate;
+    color:aliceblue;
+    -moz-border-radius:5px;
+    -webkit-border-radius:5px;
+    border-radius:5px;
+    line-height:1.1em;
+    font-size:10pt;
+    font-family:Verdana, Helvetica, sans-serif;
+}
+    body > div#public > div.migrationAlert p {
+        color:seashell;
+    }
+body > div#public > div.migrationAlert a{
+    font-size:10pt;
+    font-weight:bold;
+    font-family:inherit;
+    color:aqua;
+}
+
+body > div.migrationNotice {
+    width:160px;
+    color:inherit;
+    font-weight:bold;
+}
+
+body > div.migrationNotice {
+    width:180px;
+    position:absolute;
+    top:105px;
+    left:200px;
+    width:648px;
+    padding:0px;
+    color:white;
+    line-height:1.1em;
+}
+body > div.migrationNotice p.to-top{
+    text-align:right;
+}
+body > div.migrationNotice p.to-top a:after{
+    content:" ↑";
+    font-size:1.5em;
+}
+body > div.migrationNotice a{
+    font-size:0.9em;
+    font-weight:bold;
+    font-family:inherit;
+}
+body > div.migrationNotice span.new-label {
+    font-size:.5em;
+    text-transform:uppercase;
+    vertical-align:text-top;
+    background-color:goldenrod;
+    color:#333333;
+    padding:3px;
+    border-radius:2px;
+    font-weight:bold;
+}
+body > div.migrationNotice div.figure .figure-caption {
+    font-weight:bold;
+    margin-bottom:0;
+}
+body > div.migrationNotice div.figure img {
+        max-width:100%;
+        height:auto;    
+}
+body > div.migrationNotice div.figure {
+    text-align:center;
+    //background-color:#252525;
+    padding:20px 10px;
+    margin:10px auto;
+}
+body > div.migrationMenu{
+    width:160px;
+    position:absolute;
+    top:105px;
+    left:25px;
+    FONT-FAMILY: Verdana, Palladio, Helvetica,sans-serif;
+}
+body > div.migrationMenu h2{
+    background-color:#666666;
+    font-size:12pt;
+    text-align:left;
+    text-indent:2px;
+    font-weight:bold;
+    color:#cde5ad;
+}
+    body > div.migrationMenu ul {
+        font-size: 9pt;
+        list-style: none;
+        margin-left: 0;
+        padding-left: 25px;
+        text-indent:-20px;
+        line-height: 20px;
+}
+body > div.migrationMenu ul>li>a {
+    font-weight: normal;
+    FONT-FAMILY: Verdana, Palladio, Helvetica,sans-serif;
+}
+
+#headerAlert {
+    position:relative;
+    float:right;
+    padding-left:0px;
+    padding-right:10px;
+    width: 220px;
+    height: 73px;
+    background-color:#fc6f03;
+    border-radius:5px;
+    z-index:500;
+/*    background-image: url('en/images/imageright2.png');*/
+}
+
+    #headerAlert > .imgwithlink {
+        float:right;
+    }
+
+    #headerAlert > p
+    {
+        margin-top:5px;
+        margin-left:10px;
+        font-size:large;
+    }
+
+    #headerAlert > p > a
+    {
+        color:#00ffff;
+    }
+
+  /* 
+      Header alerts get formatted differently in the tools pages (e.g. Finding Chart) than in other pages.
+      This is probably an inefficient way of doing that.
+        -Jordan 10/5/2015
+  */
+
+#headerAlertTools
+{
+    padding-left:0px;
+    padding-right:10px;
+    width: 200px;
+    height: 73px;
+    background-color:#fc6f03;
+    border-radius:5px;
+    z-index:500;
+    float:right;
+}
+
+    #headerAlertTools > .imgwithlink {
+        float:left;
+    }
+
+    #headerAlertTools > h2
+    {
+        margin-top:5px;
+        padding-top:11px;
+        margin-left:10px;
+        font-size:small;
+        color:white;
+        height:100%;
+        vertical-align:central;
+    }
+
+    #headerAlertTools > p 
+    {
+        margin-top:15px;
+        margin-left:10px;
+        font-size:smaller;
+        clear:both;
+    }
+
+    #headerAlertTools > p >  a
+    {
+        color:cyan;
+        padding-right:10px;
+    }

@@ -1,0 +1,219 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="ObjectExplorer.Master.cs" Inherits="SkyServer.Tools.Explore.ObjectExplorer" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head runat="server">
+  
+    <link href="../../tools.css" rel="stylesheet" type="text/css" />
+    <link href="../../../alerts.css" rel="stylesheet" type="text/css" />
+    <style>
+      #check  {position: absolute; left:  0px; top: 0px;visibility:hidden;width:12px;}
+    </style>
+    
+    <title>Object Explorer</title>
+
+    <script src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
+
+    <script type="text/javascript" src="./javascript/master.js"> </script>
+    <script type="text/javascript" src="./javascript/explore.js"> </script>
+    <script type="text/javascript" src="../chart/naviClass.js"></script>
+
+    <script type="text/javascript">
+        var check;
+        function init() {
+            check = new Div("check", 124, 730);
+            //check.show();
+            check.hide();
+        }
+        function getPage() {
+            alert('ferrf')
+            $("#crossid22").load("parameters.aspx")
+        }
+    </script>
+
+
+    <asp:contentplaceholder id="OEHead" runat="server" />
+
+</head>
+
+<body onload="init()">
+    <!--form id="form1" action="summary.aspx" autocomplete="on"-->
+
+    <div id='check' ><img src='../chart/images/checkmark.gif' width="12" height="10"></div>
+
+    <div>        
+      <table border="0" cellspacing="0" cellpadding="2" bgcolor="black">
+	  <tr>
+		<td width="40"><a href="<%= enUrl %>" target="_top"><img src="images/sdssIVlogo.png" border=0 height="40"></a></td>
+		<td class="title" align="left" width="<%= tabwidth-60 %>">&nbsp;&nbsp;<%= globals.Release %></td>
+	  </tr>
+      </table>
+        <div id="search" style="display:none;">
+          <table>
+            <tr>
+              <td width="120px" align="center"><h2>Search by</h2><input type="button" onclick="toggleSearch()" value="Hide" ONMOUSEOVER="this.T_WIDTH='140';return escape('Search for specific objects.')"></input></td>
+              <td>
+                <table>
+                  <form id="formNAME" action="summary.aspx" autocomplete="on"> <tr><td align="right" class="s">Name:</td><td><input type="text" id="searchName" name="searchName" value="ACO  2255"></input></td><td><input type="submit" onclick="resolveName()" value="Find"/></td></tr></form>
+                  <form id="formRADEC" action="summary.aspx" autocomplete="on"> <tr><td align="right" class="s">RA/Dec:</td><td><input type="text" size="8" id="ra" name="ra" value="197.614455635"></input>/<input type="text" size="8" id="dec" name="dec" value="18.438168849"></input></td><td><input type="submit" onclick="press_ok('radec');" value ="Go"></input></td></tr></form>
+                  <form id="formOBJID" action="summary.aspx" autocomplete="on"> <tr><td align="right" class="s">ObjID:</td><td><input type="text" name="id" value="1237668296598749280"></input></td><td><input type="submit" onclick="press_ok('objid')" value="Go"></input></td></tr></form>
+                </table>
+               </td>
+               <td>
+                <table>
+                <form id="formSPEC" action="summary.aspx" autocomplete="on">
+                    <tr><td align="right" class="s">SpecObjID, apstar_id or apogee_id:</td><td>
+                    <input type="text" id="searchSpecID" value="2947691243863304192">
+                    </input></td><td><input type="button" onclick="press_ok('specid')" value="Go"></input></td></tr>
+                    <input type="hidden" id="sid" name="sid">
+                    <input type="hidden" id="apid" name="apid">
+                </form>
+                <form id="form5PART" action="summary.aspx" autocomplete="on"> 
+                    <tr><td align="right" class="s">5-part SDSS:</td><td>
+                    <input type="text" id="searchSDSS" value="5314-301-1-136-96"></input></td><td><input type="button" onclick="press_ok('sdss')" value="Go"></input>
+                    <input type="hidden" id="run" name="run">
+                    <input type="hidden" id="rerun" name="rerun">
+                    <input type="hidden" id="camcol" name="camcol">
+                    <input type="hidden" id="field" name="field">
+                    <input type="hidden" id="obj" name="obj">
+                    </td></tr>
+                </form>
+                <form id="formPLATE" action="summary.aspx" autocomplete="on"> <tr><td align="right" class="s">Plate-MJD-Fiber:</td><td><input type="text" size="4" name="plate" value="2618"></input>-<input type="text" size="4" name="mjd" value="54506"></input>-<input type="text" size="4" name="fiber" value="310"></input></td><td><input type="submit" onclick="press_ok('plfib')" value="Go"></input></td></tr></form>
+                </table>
+               </td>
+              </tr>
+            </table>
+        </div>
+        <div id="toc" >
+            <table width="110" cellspacing=0 cellpadding=0>
+	            <tr><td><a class="med" target="_top" href='default.aspx' title="Return to the Explore tool default page">Explore Home</a><br/></td></tr>
+                <tr><td class="s" align="right"><hr width="90"/></td></tr>
+                
+                <tr><td class="med"><a id="searchLabel" href="#" onclick="toggleSearch();">Search</a></td></tr>
+                <tr><td class="s" align="right"><hr width="90" /></td></tr>
+                <% 
+                    // If this object has a numerical id -- i.e. if it is a SDSS-I/SEGUE/BOSS object...
+                    if (id.HasValue)
+                    {
+                %>
+                        <tr><td align="left"><a class="med" href='<%=hrefs.Summary%>#imaging' title="Parameters for Imaging Observations.">Imaging Summary</a></td></tr>	
+        	            <tr><td class="s" align="right"><a target="_top" href="<%=hrefs.FITS%>" title="Get FITS images of the SDSS fields containing this object.">FITS</a></td></tr>
+                        <tr><td class="s" align="right"><a href='<%=hrefs.Chart%>' title="Link to Finding Chart for this object.">Finding chart<img src="../../images/new_window_black.png" alt=" (new window)" /></a></td></tr>
+	                    <tr><td class="s" align="right"><a target="_top" href="<%=hrefs.Matches%>" title="Find other imaging observations for this object in the Match table.">Other Observations</a></td></tr>
+	                    <tr><td class="s" align="right"><a target="_top" href="<%=hrefs.Neighbors%>" title="The nearest neighbors of this object within a predetermined radius.">Neighbors</a></td></tr>
+                        <tr><td class="s" align="right"><a target="_top" href="<%=hrefs.Galaxyzoo%>" title="Morphological classifications from Galaxy Zoo users">Galaxy Zoo</a></td></tr>
+                        <tr><td>&nbsp;</td></tr>
+	                    <tr><td class="s" align="right"><a target="_top" href="<%=hrefs.PhotoTag%>" title="Find the most popular parameters for this image.">PhotoTag</a></td></tr>
+	                    <tr><td class="s" align="right"><a target="_top" href="<%=hrefs.Field%>" title="Field table entry for the field that this object was observed in.">Field</a></td></tr>
+	                    <tr><td class="s" align="right"><a target="_top" href="<%=hrefs.Frame%>" title="Frame table entry corresponding to this Field.">Frame</a></td></tr>
+                        <tr><td class="s" align="right"><a target="_top" href='<%=hrefs.PhotoObj%>' title="Full Parameters for Imaging Observations."> PhotoObj</a></td></tr>	
+                        <%
+                        if (globals.ReleaseNumber > 4)
+                        { 
+                        %>
+		                        <tr><td class="s" align="right"><a target="_top" href="<%= hrefs.PhotoZ %>" title="Photometric redshift for this object (from the Photoz table), if it exists.">PhotoZ</a></td></tr>
+                                <%--<tr><td class="s" align="right"><a target="_top" href="<%= hrefs.PhotozRF %>" title="Random forest calculated phhotometric redshift for this object (from the PhotozRF table), if it exists.">PhotozRF</a></td></tr>--%>
+                        <% 
+                        }
+                        %>
+
+                        <tr><td align="right"><hr width="90"/></td></tr>
+	                    <tr><td><a class="med" target="_top" href='<%=hrefs.Summary%>#crossidtop' onclick="javascript:window.location.href='#crossidtop';javascript:showSection('crossid');javascript:showLink('crossid_is_hidden');javascript:hideLink('crossid_is_shown');" title="Photometric cross-identifications with other surveys, if there are any available.">Cross-ID</a><br></td></tr>
+                        <tr><td align="right"><hr width="90"/></td></tr>
+
+	                    <!--tr><td><a class="med" target="_top" href='#' onclick="javascript:getPage();"> Cross-ID2 </a><br></td></!--tr-->
+                        
+
+	                    <tr><td><a class="med" target="_top" href='<%=hrefs.Summary%>#spectro' title="Summary of spectroscopic parameters (if a spectrum was observed).">Spec Summary</a><br></td></tr>
+                      <tr><td class="s" align="right"><a target="_top" href="<%=hrefs.AllSpec%>" title="Find all the spectra observed for this object in the SpecObjAll table.">All Spectra</a></td></tr>
+	                                            <%
+                      if (specId != null)
+                      { 
+                        %>
+                      <tr><td class="s" align="right"><a target="_top" href="<%=hrefs.SpecFITS%>" title="Go to the SAS for the spectrum FITS file.">FITS</a></td></tr>
+	                    <tr><td class="s" align="right"><a target="_top" href='<%=hrefs.Plate%>' title="Browsable contents of the spectroscopic plate that this spectrum belongs to.">Plate</a></td></tr>
+                        <tr><td class="s" align="right"><a target="_top" href='<%=hrefs.SpecObj%>' title="Full Parameters for Spectroscopic Observations.">SpecObj</a></td></tr>	
+	                    <tr><td class="s" align="right"><a target="_top" href='<%=hrefs.sppLines%>' title="Stellar Parameter Pipeline indices for spectral lines observed for this spectrum.">sppLines</a></td></tr>
+
+	                    <tr><td class="s" align="right"><a target="_top" href='<%=hrefs.galSpecLine%>' title="Emission line measurements (from MPA-JHU spectroscopic re-analysis) for this spectrum.">galSpecLine</a></td></tr>
+	                    <tr><td class="s" align="right"><a target="_top" href='<%=hrefs.galSpecIndx%>' title="Index measurements (from the MPA-JHU spectroscopic catalogue) for this spectrum.">galSpecIndx</a></td></tr>
+	                    <tr><td class="s" align="right"><a target="_top" href='<%=hrefs.galSpecInfo%>' title="General information (for the MPA-JHU spectroscopic re-analysis) for this spectrum.">galSpecInfo</a></td></tr>
+
+                        <%
+                        if (globals.ReleaseNumber >= 7)         // display fit parameters only for DR7 or newer
+                        { 
+                        %>
+                            <tr><td align="right"><hr width="90"/></td></tr>
+    	                    <tr><td><a class="med" target="_top" href='<%=hrefs.theParameters%>' title="Summary of fits to spectroscopic parameters (if a spectrum was observed).">Fit Parameters</a><br /></td></tr>
+    	                    <tr><td class="s" align="right"><a target="_top" href='<%=hrefs.sppParams%>' title="Stellar Parameter Pipeline atmospheric parameters for this spectrum.">sppParams</a></td></tr>                            
+   
+                            <%
+                          if (globals.ReleaseNumber >= 8)         // display Portsmouth galaxy spectra fits only for DR8 or newer
+                          { 
+                            %>
+                                <tr><td class="s" align="right"><a target="_top" href='<%=hrefs.stellarMassStarformingPort%>' title="General information (for the Portsmouth spectroscopic re-analysis) for this spectrum, assuming a star forming model.">StarformingPort</a></td></tr>
+                                <tr><td class="s" align="right"><a target="_top" href='<%=hrefs.stellarMassPassivePort%>' title="General information (for the (for the Portsmouth spectroscopic re-analysis) for this spectrum, assuming a passive model.">PassivePort</a></td></tr>
+	                            <tr><td class="s" align="right"><a target="_top" href='<%=hrefs.emissionLinesPort%>' title="Emission line measurements (from Portsmouth spectroscopic re-analysis)">emissionLinesPort</a></td></tr>
+                                <tr><td class="s" align="right"><a target="_top" href='<%=hrefs.stellarMassPCAWiscBC03%>' title="General information (for the Wisconsin spectroscopic re-analysis) for this spectrum, assuming BC03.">PCAWiscBC03</a></td></tr>
+                                <tr><td class="s" align="right"><a target="_top" href='<%=hrefs.stellarMassPCAWiscM11%>' title="General information (for the Wisconsin spectroscopic re-analysis) for this spectrum, assuming M11.">PCAWiscM11</a></td></tr>
+                            <% } %>
+   
+                            <% if (globals.ReleaseNumber >= 10)         // display Wisconsin & Granada fits only for DR10 or newer
+                               {
+                            %>    
+                                <tr><td class="s" align="right"><a target="_top" href='<%=hrefs.stellarMassFSPSGranEarlyDust%>' title="stellarMassFSPSGranEarlyDust">FSPSGranEarlyDust</a></td></tr>
+                                <tr><td class="s" align="right"><a target="_top" href='<%=hrefs.stellarMassFSPSGranEarlyNoDust%>' title="stellarMassFSPSGranEarlyNoDust">FSPSGranEarlyNoDust</a></td></tr>
+                                <tr><td class="s" align="right"><a target="_top" href='<%=hrefs.stellarMassFSPSGranWideDust%>' title="stellarMassFSPSGranWideDust">FSPSGranWideDust</a></td></tr>
+                                <tr><td class="s" align="right"><a target="_top" href='<%=hrefs.stellarMassFSPSGranWideNoDust%>' title="stellarMassFSPSGranWideNoDust">FSPSGranWideNoDust</a></td></tr>
+                            <% } %>
+                        
+                    <% } %>
+                    <% } // if (specId != null) %>
+                    <tr><td align="right"><hr width="90"/></td></tr>
+                <%}
+                  // If the ID is a string, then it's an APOGEE object, print these also.
+                  if (!string.IsNullOrEmpty(apid))
+                  { 
+                %>
+                      <tr><td align="left"><a class="med" href='<%=hrefs.Summary%>#irspec' title="Summary of infrared spectroscopy">IR Spec Summary</a></td></tr>                      
+                      <tr><td class="s" align="right"><a target="_top" href="<%=hrefs.apogeeStar%>" title="'Display contents of ApogeeStar table">ApogeeStar</a></td></tr> 
+                      <tr><td class="s" align="right"><a target="_top" href="<%=hrefs.aspcapStar%>" title="'Display contents of ASPCAPstar table">ASPCAPstar</a></td></tr>
+                      <tr><td align="right"><hr width="90"/></td></tr>
+                <%} %>
+
+
+	            <tr><td><a class="med" target="_top" href='<%=hrefs.NED%>' title="NASA Extragalactic Database matches for this RA,dec."> NED search</a></td></tr>
+	            <tr><td><a class="med" target="_top" href='<%=hrefs.SIMBAD%>' title="SIMBAD search results for this RA,dec."> SIMBAD search</a></td></tr>
+	            <tr><td><a class="med" target="_top" href='<%=hrefs.ADS%>' title="Astrophysical Data System literature search results for this RA,dec."> ADS search</a></td></tr>
+	            <tr><td align="right"><hr width="90"/></td></tr>
+	            <tr><td><a class="med" href='<%=hrefs.ShowBook%>' title="Save and view notepad data on Explore objects.">Notes</a></td></tr>
+	            <tr><td class="s" align="right" ><div id='check2' style="display: none;"><img src='../chart/images/checkmark.gif' alt="Added to notebook" /></div><a href='<%=hrefs.SaveBook%>' title="Save this object in notepad."> Save in Notes</a></td></tr>
+	            <tr><td class="s" align="right" ><a href='<%=hrefs.ShowBook%>' title="View your saved notes, if any.">Show Notes</a></td></tr>
+	            <tr><td align="right"><hr width="90"/></td></tr>
+	            <tr><td><a class="med" href=# onclick="<%=hrefs.Print%>"> Print </a></td></tr>
+                <tr><td align="right"><hr width="90"/></td></tr>
+                <tr>
+                    <td>
+                        <div id="poweredby">
+                            <b>Powered by</b><br />
+                            <img src="../../images/sciserver_logo_inverted_vertical.png" alt="SciServer" align="middle" />
+                        </div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+     
+        <div id="content">
+            <asp:contentplaceholder id="OEContent" runat="server" />           
+        </div>              
+    </div>
+    </!--form>
+    <script language="JavaScript" type="text/javascript" src="../../wz_tooltip.js"></script>
+
+    <iframe id="test" name='test' width ="0" height="0" scrolling="no"  src="../chart/blank.html"/>
+    
+
+</body>
+</html>
