@@ -59,32 +59,43 @@
                   <form id="formNAME" action="summary.aspx" autocomplete="on"> <tr><td align="right" class="s">Name:</td><td><input type="text" id="searchName" name="searchName" value="ACO  2255"></input></td><td><input type="submit" onclick="resolveName()" value="Find"/></td></tr></form>
                   <form id="formRADEC" action="summary.aspx" autocomplete="on"> <tr><td align="right" class="s">RA/Dec:</td><td><input type="text" size="8" id="ra" name="ra" value="197.614455635"></input>/<input type="text" size="8" id="dec" name="dec" value="18.438168849"></input></td><td><input type="submit" onclick="press_ok('radec');" value ="Go"></input></td></tr></form>
                   <form id="formOBJID" action="summary.aspx" autocomplete="on"> <tr><td align="right" class="s">ObjID:</td><td><input type="text" name="id" value="1237668296598749280"></input></td><td><input type="submit" onclick="press_ok('objid')" value="Go"></input></td></tr></form>
+                  <tr><td align="right" class="s">&nbsp;</td><td></td><td></td></tr>
+                  <tr><td align="right" class="s">&nbsp;</td><td></td><td></td></tr>
                 </table>
                </td>
                <td>
                 <table>
-                <form id="formSPEC" action="summary.aspx" autocomplete="on">
-                    <tr><td align="right" class="s">SpecObjID, apstar_id or apogee_id:</td><td>
-                    <input type="text" id="searchSpecID" value="2947691243863304192">
-                    </input></td><td><input type="button" onclick="press_ok('specid')" value="Go"></input></td></tr>
-                    <input type="hidden" id="sid" name="sid">
-                    <input type="hidden" id="apid" name="apid">
-                </form>
-                <form id="form5PART" action="summary.aspx" autocomplete="on"> 
-                    <tr><td align="right" class="s">5-part SDSS:</td><td>
-                    <input type="text" id="searchSDSS" value="5314-301-1-136-96"></input></td><td><input type="button" onclick="press_ok('sdss')" value="Go"></input>
-                    <input type="hidden" id="run" name="run">
-                    <input type="hidden" id="rerun" name="rerun">
-                    <input type="hidden" id="camcol" name="camcol">
-                    <input type="hidden" id="field" name="field">
-                    <input type="hidden" id="obj" name="obj">
-                    </td></tr>
-                </form>
-                <form id="formPLATE" action="summary.aspx" autocomplete="on"> <tr><td align="right" class="s">Plate-MJD-Fiber:</td><td><input type="text" size="4" name="plate" value="2618"></input>-<input type="text" size="4" name="mjd" value="54506"></input>-<input type="text" size="4" name="fiber" value="310"></input></td><td><input type="submit" onclick="press_ok('plfib')" value="Go"></input></td></tr></form>
+                    <form id="formSPEC" action="summary.aspx" autocomplete="on">
+                        <tr><td align="right" class="s">SpecObjID, apstar_id or apogee_id:</td><td>
+                        <input type="text" id="searchSpecID" value="2947691243863304192">
+                        </input></td><td><input type="button" onclick="press_ok('specid')" value="Go"></input></td></tr>
+                        <input type="hidden" id="sid" name="sid">
+                        <input type="hidden" id="apid" name="apid">
+                    </form>
+                    <form id="form5PART" action="summary.aspx" autocomplete="on"> 
+                        <tr><td align="right" class="s">5-part SDSS:</td><td>
+                        <input type="text" id="searchSDSS" value="5314-301-1-136-96"></input></td><td><input type="button" onclick="press_ok('sdss')" value="Go"></input>
+                        <input type="hidden" id="run" name="run">
+                        <input type="hidden" id="rerun" name="rerun">
+                        <input type="hidden" id="camcol" name="camcol">
+                        <input type="hidden" id="field" name="field">
+                        <input type="hidden" id="obj" name="obj">
+                        </td></tr>
+                    </form>
+                    <form id="formPLATE" action="summary.aspx" autocomplete="on"> <tr><td align="right" class="s">Plate-MJD-Fiber:</td><td><input type="text" size="4" name="plate" value="2618"></input>-<input type="text" size="4" name="mjd" value="54506"></input>-<input type="text" size="4" name="fiber" value="310"></input></td><td><input type="submit" onclick="press_ok('plfib')" value="Go"></input></td></tr></form>
+
+                    <form id="formMANGA" action="summary.aspx" autocomplete="on">
+                        <tr><td align="right" class="s">MangaID:</td><td>
+                        <input type="text" id="mangaid" name="mangaid" value="12-193481">
+                        </input></td><td><input type="button" onclick="press_ok('mangaid')" value="Go"></input></td></tr>
+                    </form>
+                    <tr><td align="right" class="s">&nbsp;</td><td></td><td></td></tr>
+
                 </table>
                </td>
               </tr>
             </table>
+            <br>
         </div>
         <div id="toc" >
             <table width="110" cellspacing=0 cellpadding=0>

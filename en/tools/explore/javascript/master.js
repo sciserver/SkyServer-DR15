@@ -218,6 +218,10 @@ function press_ok(kind) {
         case "plfib":
             //window.location = windowPage+'?plate=' + f.searchPlate.value + '&mjd=' + f.searchMJD.value + '&fiber=' + f.searchFiber.value;
             break;
+        case "mangaid":
+            //window.location = windowPage+'?plate=' + f.searchPlate.value + '&mjd=' + f.searchMJD.value + '&fiber=' + f.searchFiber.value;
+            document.forms["formMANGA"].submit();
+            break;
         default:
             alert('Not supported');
             break;

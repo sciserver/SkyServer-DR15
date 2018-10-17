@@ -2,15 +2,14 @@
 <%@ Import Namespace="SkyServer" %>
 <%@ Import Namespace="SkyServer.Tools.Explore" %>
 <%@ Import Namespace="System.Data" %>
-<% if (HasData)   { %>
+<% if (ShowData)   { %>
 
 
 
 <div id="manga">
     
-  
+<% if(dt.Rows[0]["srvymode"].ToString() == "MaNGA dither") { %>
         <h3>MaNGA observation(s)</h3>
-
 
 
 
@@ -30,6 +29,18 @@
                     </tr>
                     <tr> 
                         <td><a target="_blank" class="showinglink" href="<%=globals.MangaUrlBase + dt.Rows[0]["versdrp3"].ToString() + "/" + dt.Rows[0]["plate"].ToString() + "/stack/manga-" + dt.Rows[0]["plate"].ToString() + "-" + dt.Rows[0]["ifudsgn"].ToString() + "-LOGCUBE.fits.gz"%>"> LOG Data Cube </a> </td>
+                    </tr>                    
+                    <tr> 
+                                <td>
+                                    <b>
+                                        <% string marvinLink = globals.MarvinUrlBase + "galaxy/" + dt.Rows[0]["plateifu"].ToString() ; %>
+                                        <a class='content' href="<%=marvinLink %>"  target='_blank'>
+                                            Explore in Marvin<img src='../../images/new_window_black.png' alt=' (new window)' />
+                                        </a>
+                                    </b>
+                                </td>
+
+
                     </tr>                    
                     <tr>  
                         <td align="center" class="h">plateIFU</td>
@@ -105,7 +116,18 @@
                             <tr> 
                                 <td><a target="_blank" class="showinglink" href="<%=globals.MangaUrlBase + dt.Rows[RowIndex]["versdrp3"].ToString() + "/" + dt.Rows[RowIndex]["plate"].ToString() + "/stack/manga-" + dt.Rows[RowIndex]["plate"].ToString() + "-" + dt.Rows[RowIndex]["ifudsgn"].ToString() + "-LOGCUBE.fits.gz"%>"> LOG Data Cube </a> </td>
                             </tr>                    
+                            <tr> 
+                                <!--<td><a target="_blank" class="showinglink" href="<%=globals.MarvinUrlBase + "galaxy/" + dt.Rows[0]["plateifu"].ToString() %>"> Explore in Marvin </a> </td>-->
+                                <td>
+                                    <b>
+                                        <% marvinLink = globals.MarvinUrlBase + "galaxy/" + dt.Rows[RowIndex]["plateifu"].ToString() ; %>
+                                        <a class='content' href="<%=marvinLink %>"  target='_blank'>
+                                            Explore in Marvin<img src='../../images/new_window_black.png' alt=' (new window)' />
+                                        </a>
+                                    </b>
+                                </td>
 
+                            </tr>                    
                             <tr>  
                                 <td align="center" class="h">plateIFU</td>
                                 <td align="center" class="h">mangaid</td>
@@ -163,6 +185,10 @@
 
 
     <!--%  master.showHTable( ds, 400, "");   %-->
+
+<%} %>
+
+
 
 </div>  <!-- end of manga div -->
 <%} %>

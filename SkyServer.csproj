@@ -1800,6 +1800,7 @@
     <Content Include="en\tools\explore\ExploreControls\CrossIdControls.ascx" />
     <Content Include="en\tools\explore\ExploreControls\ImagingControl.ascx" />
     <Content Include="en\tools\explore\ExploreControls\MangaControl.ascx" />
+    <Content Include="en\tools\explore\ExploreControls\MastarControl.ascx" />
     <Content Include="en\tools\explore\ExploreControls\MetaDataControl.ascx" />
     <Content Include="en\tools\explore\ExploreControls\SpectralControl.ascx" />
     <Content Include="en\tools\explore\ExploreError.aspx" />
@@ -5682,6 +5683,13 @@
     </Compile>
     <Compile Include="en\tools\explore\ExploreControls\MangaControl.ascx.designer.cs">
       <DependentUpon>MangaControl.ascx</DependentUpon>
+    </Compile>
+    <Compile Include="en\tools\explore\ExploreControls\MastarControl.ascx.cs">
+      <DependentUpon>MastarControl.ascx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="en\tools\explore\ExploreControls\MastarControl.ascx.designer.cs">
+      <DependentUpon>MastarControl.ascx</DependentUpon>
     </Compile>
     <Compile Include="en\tools\explore\ExploreControls\MetaDataControl.ascx.cs">
       <DependentUpon>MetaDataControl.ascx</DependentUpon>

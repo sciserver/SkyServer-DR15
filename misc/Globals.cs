@@ -74,6 +74,7 @@ namespace SkyServer
         private string casjobsRESTapi;
         private string contentDataset;
         private string mangaUrlBase;
+        private string marvinUrlBase;
         private string motd;
 
         public string MessageOfTheDay
@@ -522,7 +523,11 @@ namespace SkyServer
         {
             get { return mangaUrlBase; }
         }
-        
+
+        public string MarvinUrlBase
+        {
+            get { return marvinUrlBase; }
+        }
 
 
 
@@ -578,6 +583,7 @@ namespace SkyServer
             this.skyserverRESTservice = appSettings["restwebservice"];
             this.casjobsRESTapi = appSettings["casjobsRESTapi"];
             this.mangaUrlBase = appSettings["mangaUrlBase"];
+            this.marvinUrlBase = appSettings["marvinUrlBase"];
             this.motd = appSettings["MessageOfTheDayPath"];
 
             if (releaseNumber == 8)

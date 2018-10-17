@@ -30,7 +30,8 @@ namespace SkyServer.Tools.Explore
         public string apid;
         public string objId = null;
         public string specObjId = null;
-                
+        public string mangaid = null;
+
         public double? ra = null;
         public double? dec = null;
 
@@ -44,7 +45,8 @@ namespace SkyServer.Tools.Explore
         public short? rerun;
         public short? camcol;
         public short? field ;
-        
+
+
         protected void Page_Load(object sender, EventArgs e)
         {
             
@@ -57,7 +59,7 @@ namespace SkyServer.Tools.Explore
             enUrl = getEnURL();
            
             // common query to explorer
-            string allId ="id="+id + "&spec=" + specId + "&apid=" + apid+"&fieldId="+fieldId+"&ra="+ra+"&dec="+dec+"&plateId="+plateId;
+            string allId ="id="+id + "&spec=" + specId + "&apid=" + apid+"&fieldId="+fieldId+"&ra="+ra+"&dec="+dec+"&plateId="+plateId+"&mangaid="+mangaid;
 
             
             // id is the decimal representation; objId is the hex representation.
@@ -191,6 +193,7 @@ namespace SkyServer.Tools.Explore
 
                 id = o.id;
                 specId = o.specId;
+                mangaid = o.mangaid;
             }
             else
             {
@@ -211,6 +214,8 @@ namespace SkyServer.Tools.Explore
                 try { dec = Double.Parse(Request.QueryString["dec"]); }
                 catch { }
                 try { plateId = Request.QueryString["plateId"]; }
+                catch { }
+                try { mangaid = Request.QueryString["mangaid"]; }
                 catch { }
             }
         }

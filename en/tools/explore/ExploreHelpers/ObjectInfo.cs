@@ -11,6 +11,7 @@ namespace SkyServer.Tools.Explore
         public long? id = null;
         public string apid;
         public decimal? specId = null;
+        public string mangaid = null;
 
         public string objId = null;
         public string specObjId = null;

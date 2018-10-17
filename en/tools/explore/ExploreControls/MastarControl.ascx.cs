@@ -9,7 +9,7 @@ using System.Data.SqlClient;
 
 namespace SkyServer.Tools.Explore
 {
-    public partial class MangaControl : System.Web.UI.UserControl
+    public partial class MastarControl : System.Web.UI.UserControl
     {
         protected Globals globals;
         protected ObjectExplorer master;
@@ -33,7 +33,7 @@ namespace SkyServer.Tools.Explore
         public long mngtarg2;
         public long mngtarg3;
 
-        protected bool ShowData = false;
+        protected bool HasData = false;
 
         protected string task;
 
@@ -43,7 +43,6 @@ namespace SkyServer.Tools.Explore
         public DataSet ds = new DataSet();
         public DataTable dt = new DataTable();
 
-
         protected void Page_Load(object sender, EventArgs e)
         {
             //ds = (DataSet)Session["objectDataSet"];
@@ -51,13 +50,13 @@ namespace SkyServer.Tools.Explore
             globals = (Globals)Application[Globals.PROPERTY_NAME];
             master = (ObjectExplorer)Page.Master;
 
-            if (globals.ReleaseNumber >= 13 && ((DataSet)Session["LoadExplore"]).Tables.IndexOf("MangaData") >= 0 && ((DataSet)Session["LoadExplore"]).Tables["MangaData"].Rows.Count > 0 && ((DataSet)Session["LoadExplore"]).Tables["MastarData"].Rows.Count == 0)
+            if (globals.ReleaseNumber >= 15 && ((DataSet)Session["LoadExplore"]).Tables.IndexOf("MastarData") >= 0 && ((DataSet)Session["LoadExplore"]).Tables["MastarData"].Rows.Count > 0)
             {
-                ShowData = true;
+                HasData = true;
                 try
                 {
-                    ds.Merge(((DataSet)Session["LoadExplore"]).Tables["MangaData"]);
-                    dt.Merge(((DataSet)Session["LoadExplore"]).Tables["MangaData"]);
+                    ds.Merge(((DataSet)Session["LoadExplore"]).Tables["MastarData"]);
+                    dt.Merge(((DataSet)Session["LoadExplore"]).Tables["MastarData"]);
                 }
                 catch (Exception ex)
                 {

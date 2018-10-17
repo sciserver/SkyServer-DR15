@@ -34,6 +34,8 @@
     <%--This Section for MANGA parameters--%>
     <%@ Register TagPrefix="manga" TagName="MangaControl" Src="./ExploreControls/MangaControl.ascx" %>
 
+    <%--This Section is for MaStar--%>
+    <%@ Register TagPrefix="mastar" TagName="MastarControl" Src="./ExploreControls/MastarControl.ascx" %>
 
    <div class="content">
    <metadata:MetadataParameters ID="MetadataParameters1" runat="server"/>
@@ -45,6 +47,7 @@
    <spectral:SpectralControl ID="SpectralControl1" runat="server" /> 
    <apogee:ApogeeControl ID="ApogeeControl1" runat="server" />
    <manga:MangaControl ID="MangaControl1" runat="server" />
+   <mastar:MastarControl ID="MastarControl" runat="server" />
    </div>  
 
 

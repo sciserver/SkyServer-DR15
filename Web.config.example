@@ -31,6 +31,7 @@
     <add key="visualScale" value="0.79224"/>
     <add key="exploreDefault" value="1237668296598749280"/>
     <add key="sdssUrlBase" value="http://www.sdss.org/"/>
+	
     <add key="logURL" value="http://skyserver.sdss.org/log/en/traffic/"/>
     <add key="casJobs" value="http://skyserver.sdss.org/CasJobs/"/>
     <add key="defaultSpRerun" value="26"/>
@@ -40,6 +41,9 @@
     <add key="urlProjRegister" value="http://skyserver.pha.jhu.edu/register/"/>
     <add key="apogeeSpectrumLink" value="http://dr12.sdss3.org/irSpectrumDetail" />
     <add key="apogeeFitsLink" value="http://dr12.sdss3.org/sas/dr12/apogee/spectro/redux/" />
+    <add key="sdssUrlBase" value="http://www.sdss.org/" />
+    <add key="mangaUrlBase" value="http://data.sdss.org/sas/dr15/manga/spectro/redux/" />
+    <add key="marvinUrlBase" value="http://sas.sdss.org/marvin/" />	
     <add key="helpdesk" value="helpdesk@sdss3.org"/>
     <add key="smtp" value="mail.pha.jhu.edu"/>    
 

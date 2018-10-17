@@ -44,6 +44,7 @@ namespace SkyServer.Tools.Explore
 
         public bool WasObservedWithApogee = false;
         public bool WasObservedWithManga = false;
+        public bool WasObservedWithMastar = false;
         public string OtherObsText = "";
 
         protected void Page_Load(object sender, EventArgs e)
@@ -62,20 +63,29 @@ namespace SkyServer.Tools.Explore
             if (master.objId != null && !master.objId.Equals(""))
                 executeQuery();
 
-            if (((DataSet)Session["LoadExplore"]).Tables.IndexOf("MangaData") >= 0 && ((DataSet)Session["LoadExplore"]).Tables["MangaData"].Rows.Count > 0)
+            DataSet dataSet = (DataSet)Session["LoadExplore"];
+
+            if (dataSet.Tables.IndexOf("MangaData") >= 0 && dataSet.Tables["MangaData"].Rows.Count > 0  && dataSet.Tables["MangaData"].Rows[0]["srvymode"].ToString() == "APOGEE lead")
+                WasObservedWithMastar = true;
+
+            if (dataSet.Tables.IndexOf("MangaData") >= 0 && dataSet.Tables["MangaData"].Rows.Count > 0 && dataSet.Tables["MangaData"].Rows[0]["srvymode"].ToString() != "APOGEE lead")
                 WasObservedWithManga = true;
 
-            if (((DataSet)Session["LoadExplore"]).Tables.IndexOf("ApogeeData") >= 0 && ((DataSet)Session["LoadExplore"]).Tables["ApogeeData"].Rows.Count > 0)
+            if (dataSet.Tables.IndexOf("ApogeeData") >= 0 && dataSet.Tables["ApogeeData"].Rows.Count > 0)
                 WasObservedWithApogee = true;
 
-            if (WasObservedWithManga && !WasObservedWithApogee)
-                OtherObsText = "This object was also observed in <a href=\"#manga\" style=\"color:blue\">MaNGA</a>";
-            if (WasObservedWithApogee && !WasObservedWithManga)
-                OtherObsText = "This object was also observed in <a href=\"#irspec\" style=\"color:blue\">APOGEE</a>";
-            if (WasObservedWithManga && WasObservedWithApogee)
-                OtherObsText = "This object was also observed in <a href=\"#irspec\" style=\"color:blue\">APOGEE</a> and <a href=\"#manga\" style=\"color:blue\">MaNGA</a>";
+            if (WasObservedWithMastar || WasObservedWithManga || WasObservedWithApogee)
+                OtherObsText = "This object was also observed in";
 
 
+            if (WasObservedWithManga)
+                OtherObsText += " <a href=\"#manga\" style=\"color:blue\">MaNGA</a>,";
+            if (WasObservedWithApogee)
+                OtherObsText += " <a href=\"#irspec\" style=\"color:blue\">APOGEE</a>,";
+            if (WasObservedWithMastar)
+                OtherObsText += " <a href=\"#manga\" style=\"color:blue\">MaStar</a>,";
+
+            OtherObsText = OtherObsText.TrimEnd(',');
 
 
         }

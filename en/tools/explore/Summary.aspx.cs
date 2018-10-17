@@ -68,7 +68,7 @@ namespace SkyServer.Tools.Explore
             //string AllParameters = rs.GetURIparameters(Request);
             string AllParameters = "";
             bool CanResolve = false;
-            string[] NecessaryParams = new string[] { "id", "objid", "sid", "spec", "specobjid", "apid", "ra", "dec", "plate", "mjd", "fiber", "run", "rerun", "camcol", "field", "obj" };
+            string[] NecessaryParams = new string[] { "id", "objid", "sid", "spec", "specobjid", "apid", "ra", "dec", "plate", "mjd", "fiber", "run", "rerun", "camcol", "field", "obj","mangaid" };
             foreach(string key in Request.QueryString.AllKeys)
             {
                 if (NecessaryParams.Contains(key.ToLower()))
@@ -86,6 +86,7 @@ namespace SkyServer.Tools.Explore
             objectInfo.objId = objectInfo.LoadExplore.Tables["objectInfo"].Rows[0]["objId"].ToString();
             objectInfo.specObjId = objectInfo.LoadExplore.Tables["objectInfo"].Rows[0]["specObjId"].ToString();
             objectInfo.apid = objectInfo.LoadExplore.Tables["objectInfo"].Rows[0]["apid"].ToString();
+            //objectInfo.mangaid = objectInfo.LoadExplore.Tables["objectInfo"].Rows[0]["mangaid"].ToString();
             parseIds();
             //Session["objectInfo"] = objectInfo;            
         }
