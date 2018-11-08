@@ -2177,7 +2177,7 @@ Some hints on searching SkyServer:</p>
 	cmd += "&nbsp;&nbsp;&nbsp;&nbsp; TOP 100 mangaid, psfmag_2, psfmag_3, psfmag_4, plate, IFUDESIGN <br>\r\n";
 	cmd += "FROM Mastar_goodvisits <br>\r\n";
 	cmd += "WHERE  <br>\r\n";
-	cmd += "&nbsp;&nbsp;&nbsp;&nbsp; (mngtarg2 & POWER(2, 8)) &ne; 0 <br>\r\n";
+	cmd += "&nbsp;&nbsp;&nbsp;&nbsp; (mngtarg2 & POWER(2, 8)) <> 0 <br>\r\n";
 	cmd += "&nbsp;&nbsp;&nbsp;&nbsp; AND  psfmag_3 BETWEEN 14.5 AND 19.0 <br>\r\n";
 	cmd += "&nbsp;&nbsp;&nbsp;&nbsp; AND (psfmag_2 - psfmag_3) BETWEEN 0.55 AND 0.75 <br>\r\n";
 	cmd += " <br>\r\n";
