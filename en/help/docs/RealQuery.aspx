@@ -67,46 +67,11 @@ before you try any queries, especially if you are new to SQL or the SkyServer.
 <br><a href="#countsbytype">Counts by type and program</a>
 <br><a href="#wisexmatch">Using WISE Cross-Match</a>
 
-</td>
-
-<td width="5">&nbsp;</td>
-
-<td class='tsml'>
-<b><i>Galaxies:</i></b>
-<br><a href="#cleanGals">Clean photometry - Galaxies</a>
-<br><a href="#galblue">Galaxies with blue centers</a>
-<br><a href="#diamlim">Diameter limited sample</a>
-<br><a href="#lrg">LRG sample selection</a>
-<br><a href="#htm">Galaxy counts on HTM grid</a>
-<br><a href="#zoo">Classifications from Galaxy Zoo</a>
-<br><a href="#bosstarg">BOSS target selection</a>
-<br><a href="#bossgal1">BOSS Stellar Masses</a>
-<br><a href="#bossgal2">BOSS Stellar Vel. Disps.</a>
-
-<br><hr>
-
-<b><i>Stars:</i></b>
-<br><a href="#cleanStars">Clean photometry - Stars</a>
-<br><a href="#cv">CVs using colors</a>
-<br><a href="#bincol">Binary stars colors</a>
-<br><a href="#spplines">Using sppLines table</a>
-<br><a href="#sppparams">Using sppParams table</a>
-<br /><a href="#pm">Proper motions</a>
-<!-- <br><font color="red"><b>Stars by spectral class (KS)</b></font> -->
-
-<br><hr>
-
-<b><i>Quasars:</i></b>
-<br><a href="#qsospec">QSOs by spectroscopy</a>
-<br><a href="#qsocol">QSOs by colors</a>
-<br><a href="#quasar3">FIRST matches for quasars</a>
-
 <br><hr>
 
 <b><i>Varaibility Queries:</i></b>
 <br><a href="#multiple">Stars multiply measured</a>
-<br><a href="#timeseries">Multiple Detections and Time Series</a>
-<br><a href="#qsoVar">eBOSS QSO Variability</a>
+<br><a href="#timeseries">Multiple Detections, Time Series</a>
 
 </td>
 
@@ -126,6 +91,44 @@ before you try any queries, especially if you are new to SQL or the SkyServer.
 
 <br><hr>
 
+<b><i>Galaxies:</i></b>
+<br><a href="#cleanGals">Clean photometry - Galaxies</a>
+<br><a href="#galblue">Galaxies with blue centers</a>
+<br><a href="#diamlim">Diameter limited sample</a>
+<br><a href="#lrg">LRG sample selection</a>
+<br><a href="#htm">Galaxy counts on HTM grid</a>
+<br><a href="#zoo">Galaxy Zoo classifications</a>
+
+<br><hr>
+
+<b><i>Stars:</i></b>
+<br><a href="#cleanStars">Clean photometry - Stars</a>
+<br><a href="#cv">CVs using colors</a>
+<br><a href="#bincol">Binary stars colors</a>
+<br><a href="#spplines">Using sppLines table</a>
+<br><a href="#sppparams">Using sppParams table</a>
+<br /><a href="#pm">Proper motions</a>
+<!-- <br><font color="red"><b>Stars by spectral class (KS)</b></font> -->
+
+<br><hr>
+
+<b><i>Quasars:</i></b>
+<br><a href="#qsospec">QSOs by spectroscopy</a>
+<br><a href="#qsocol">QSOs by colors</a>
+<br><a href="#quasar3">FIRST matches for quasars</a>
+
+</td>
+
+<td width="5">&nbsp;</td>
+
+<td class='tsml'>
+<b><i>BOSS:</i></b>
+<br><a href="#bosstarg">BOSS target selection</a>
+<br><a href="#bossgal1">BOSS Stellar Masses</a>
+<br><a href="#bossgal2">BOSS Stellar Vel. Disps.</a>
+
+<br><hr>
+
 <b><i>APOGEE:</i></b>
 <br><a href="#apogeePlate">All APOGEE Plate Visits</a>
 <br><a href="#aspcapParams">ASPCAP Parameters and Errors</a>
@@ -138,12 +141,25 @@ before you try any queries, especially if you are new to SQL or the SkyServer.
 <br><a href="#apogeeStarPhoto">SDSS photometry for APOGEE Stars</a>
 
 <br><hr>
+<b><i>eBOSS:</i></b><a href="#ebossQsoVar">&nbsp;QSO Variability</a>
 
-<b><i>MaNGA Queries:</i></b>
+<br><hr>
+
+<b><i>MaNGA:</i></b>
 <br><a href="#mangaCubes">MaNGA Data Cubes</a>
 <br><a href="#mangaCubesGood">MaNGA Data Cubes of Good Quality</a>
 <br><a href="#mangaCubesPrimary">MaNGA Data Cubes of Primary Sample</a>
 <br><a href="#mangaTarget">MaNGA Targets</a>
+<br><a href="#mangaDAP">MaNGA DAP Galaxies</a>
+
+<br><hr>
+
+<b><i>Mastar:</i></b>
+<br><a href="#mastarGStars">Mastar Selecting G-stars</a>
+<br><a href="#mastarClusterCtr">Mastar Stars near cluster center</a>
+<br><a href="#mastarHiVelStars">Mastar High-velocity stars</a>
+<br><a href="#mastarKDwarfs">Mastar K-type dwarfs using colors</a>
+<br><a href="#mastarInfoStars">Mastar Info from stars near cluster ctr</a>
 
 <br>
 </td>
@@ -2060,11 +2076,12 @@ Some hints on searching SkyServer:</p>
 	cmd += "</table>\r\n<br><br>";
 	showQuery( qName, qry, cmd, cmd );
 
-	qName = "qsoVar";
+	qName = "ebossQsoVar";
 	qry = "eBOSS QSO Variability";
 	cmd = tableDef;
 	cmd += "-- <i>An example of how to use the eBOSS QSO Variability VAC</i> <br>\r\n";
-	cmd += "-- Get the structure function parameters (A,gamma) from PTF photometry for all quasar targets, except in the stripe region</i> <br>\r\n";
+	cmd += "-- Get the structure function parameters (A,gamma) from PTF photometry for all quasar targets, <br>\r\n";
+	cmd += "--  except in the stripe region. <br>\r\n";
 	cmd += "-- The cut VAR_CHI2>2 and VAR_A>0.1 selects objects with a significantly varying lightcurve. <br>\r\n";
 	cmd += "  <br>\r\n";
 	cmd += "SELECT <br>\r\n";
@@ -2076,6 +2093,120 @@ Some hints on searching SkyServer:</p>
 	cmd += "</table>\r\n<br><br>";
 	showQuery( qName, qry, cmd, cmd );
 
+	qName = "mangaDAP";
+	qry= "MaNGA DAP Galaxies";
+	cmd = tableDef;
+	cmd += "-- <i>An example of using the MaNGA Data Analysis Pipeline (DAP)</i> <br>\r\n";
+	cmd += "-- Find all galaxies with a star-formation rate within one effective radii &gt; 5 <br>\r\n";
+	cmd += "-- solar masses per year. <br>\r\n";
+	cmd += "  <br>\r\n";
+	cmd += "SELECT <br>\r\n";
+	cmd += "&nbsp;&nbsp;&nbsp;&nbsp; TOP 100 mangaid, objra, objdec, daptype, z, sfr_1re <br>\r\n";
+	cmd += "FROM mangaDAPall <br>\r\n";
+	cmd += "WHERE sfr_1re &gt; 5 and daptype = 'HYB10-GAU-MILESHC' <br>\r\n";
+	cmd += " <br>\r\n";
+	cmd += "<br></td></tr>\r\n";
+	cmd += "</table>\r\n<br><br>";
+	showQuery( qName, qry, cmd, cmd );
+
+	qName = "mastarGStars";
+	qry = "Mastar Selecting G-stars";
+	cmd = tableDef;
+	cmd += "-- <i>Selecting G-stars from Mastar_Goodstars</i> <br>\r\n";
+	cmd += "-- This query returns the parameters for the first 50 G-stars in the mastar_goodstars table. <br>\r\n";
+	cmd += "-- G-stars are selected using a temperature criterion. <br>\r\n";
+	cmd += "  <br>\r\n";
+	cmd += "SELECT <br>\r\n";
+	cmd += "&nbsp;&nbsp;&nbsp;&nbsp; TOP 100 mangaid, input_teff, input_logg, input_fe_h, input_alpha_m <br>\r\n";
+	cmd += "FROM Mastar_goodstars <br>\r\n";
+	cmd += "WHERE input_teff BETWEEN 5000 AND 6000 <br>\r\n";
+	cmd += " <br>\r\n";
+	cmd += "<br></td></tr>\r\n";
+	cmd += "</table>\r\n<br><br>";
+	showQuery( qName, qry, cmd, cmd );
+
+
+	qName = "mastarClusterCtr";
+	qry = "Mastar Stars near cluster center";
+	cmd = tableDef;
+	cmd += "-- <i>Selecting stars near cluster center</i> <br>\r\n";
+	cmd += "-- This query returns the coordinates and parameters for stars within 0.5 degrees of<br>\r\n";
+	cmd += "-- the open cluster M67 (central coordinates 132.83, 11.82) in the Mastar_ggodstars <br>\r\n";
+	cmd += "-- the mastar_goodstars table that have been observed more than once (nvisits). <br>\r\n";
+	cmd += "  <br>\r\n";
+	cmd += "SELECT <br>\r\n";
+	cmd += "&nbsp;&nbsp;&nbsp;&nbsp; TOP 100 mangaid, nvisits, objra, objdec, input_teff, input_teff, input_logg, <br>\r\n";
+	cmd += "&nbsp;&nbsp;&nbsp;&nbsp; input_fe_h, input_alpha_m <br>\r\n";
+	cmd += "FROM Mastar_goodstars <br>\r\n";
+	cmd += "WHERE  <br>\r\n";
+	cmd += "&nbsp;&nbsp;&nbsp;&nbsp; POWER(objra - 132.83, 2) + POWER(objdec - 11.82, 2) &lt; POWER(0.5, 2) <br>\r\n";
+	cmd += "&nbsp;&nbsp;&nbsp;&nbsp; AND nvisits &ge; 2 <br>\r\n";
+	cmd += " <br>\r\n";
+	cmd += "<br></td></tr>\r\n";
+	cmd += "</table>\r\n<br><br>";
+	showQuery( qName, qry, cmd, cmd );
+
+	qName = "mastarHiVelStars";
+	qry = "Mastar High-velocity stars";
+	cmd = tableDef;
+	cmd += "-- <i>High Velocity Stars in mastar_goodvisits</i> <br>\r\n";
+	cmd += "-- This query returns the gri magnitudes, radial velocities and uncertainties, <br>\r\n";
+	cmd += "-- for stars with velocities &gt; 300 km/s. It restricts to stars with good velocity<br>\r\n";
+	cmd += "-- measurements through the v_errcode selection criteria. <br>\r\n";
+	cmd += "  <br>\r\n";
+	cmd += "SELECT <br>\r\n";
+	cmd += "&nbsp;&nbsp;&nbsp;&nbsp; TOP 100 mangaid, objra, objdec, psfmag_2, psfmag_3, psfmag_4, heliov, verr<br>\r\n";
+	cmd += "FROM Mastar_goodvisits <br>\r\n";
+	cmd += "WHERE heliov &gt; 300 <br>\r\n";
+	cmd += "&nbsp;&nbsp;&nbsp;&nbsp; AND v_errcode = 0 <br>\r\n";
+	cmd += " <br>\r\n";
+	cmd += "<br></td></tr>\r\n";
+	cmd += "</table>\r\n<br><br>";
+	showQuery( qName, qry, cmd, cmd );
+
+	qName = "mastarKDwarfs";
+	qry = "Mastar K-type dwarfs using colors";
+	cmd = tableDef;
+	cmd += "-- <i>Search for K-type dwarfs using color criteria</i> <br>\r\n";
+	cmd += "-- This query searches for K-type dwarfs using color cuts from SEGUE. <br>\r\n";
+	cmd += "-- Returns the gri magnitudes, plate ID and fiber bundle. <br>\r\n";
+	cmd += "-- Uses the mngtarg2 flag to select stars from the same photometry <br>\r\n";
+	cmd += "-- source catalog. Bit 8 is set for stars from the APASS system. <br>\r\n";
+	cmd += "  <br>\r\n";
+	cmd += "SELECT <br>\r\n";
+	cmd += "&nbsp;&nbsp;&nbsp;&nbsp; TOP 100 mangaid, psfmag_2, psfmag_3, psfmag_4, plate, IFUDESIGN <br>\r\n";
+	cmd += "FROM Mastar_goodvisits <br>\r\n";
+	cmd += "WHERE  <br>\r\n";
+	cmd += "&nbsp;&nbsp;&nbsp;&nbsp; (mngtarg2 & POWER(2, 8)) &ne; 0 <br>\r\n";
+	cmd += "&nbsp;&nbsp;&nbsp;&nbsp; AND  psfmag_3 BETWEEN 14.5 AND 19.0 <br>\r\n";
+	cmd += "&nbsp;&nbsp;&nbsp;&nbsp; AND (psfmag_2 - psfmag_3) BETWEEN 0.55 AND 0.75 <br>\r\n";
+	cmd += " <br>\r\n";
+	cmd += "<br></td></tr>\r\n";
+	cmd += "</table>\r\n<br><br>";
+	showQuery( qName, qry, cmd, cmd );
+
+	qName = "mastarInfoStars";
+	qry = "Mastar Info from stars near cluster center";
+	cmd = tableDef;
+	cmd += "-- <i>Retrieve parameters and observation information for stars near cluster center</i> <br>\r\n";
+	cmd += "-- This query joins the mastar_goodstars and mastar_goodvisits tables <br>\r\n";
+	cmd += "-- to retrieve the parameters, plate ID, fiber bundle, and  <br>\r\n";
+	cmd += "-- spectral quality flags for stars within 0.5 degrees <br>\r\n";
+	cmd += "-- of the open cluster M67 (central coordinates 132.833, 11.82)<br>\r\n";
+	cmd += "-- that have been observed more than once (nvisits). <br>\r\n";
+	cmd += "  <br>\r\n";
+	cmd += "SELECT <br>\r\n";
+	cmd += "&nbsp;&nbsp;&nbsp;&nbsp; s.mangaid, s.input_teff, s.input_teff, s.input_logg,  <br>\r\n";
+	cmd += "&nbsp;&nbsp;&nbsp;&nbsp; s.input_fe_h, s.input_alpha_m, v.plate, v.ifudesign, v.mjdqual  <br>\r\n";
+	cmd += "FROM mastar_goodstars AS s <br>\r\n";
+	cmd += "&nbsp;&nbsp;&nbsp;&nbsp; JOIN mastar_goodvisits AS v ON s.mangaid = v.mangaid <br>\r\n";
+	cmd += "WHERE <br>\r\n";
+	cmd += "&nbsp;&nbsp;&nbsp;&nbsp; POWER(s.objra - 132.83, 2) + POWER(s.objdec - 11.82, 2) &lt; POWER(0.5, 2) <br>\r\n";
+	cmd += "&nbsp;&nbsp;&nbsp;&nbsp; AND s.nvisits &ge; 2 <br>\r\n";
+	cmd += " <br>\r\n";
+	cmd += "<br></td></tr>\r\n";
+	cmd += "</table>\r\n<br><br>";
+	showQuery( qName, qry, cmd, cmd );
 
 %>
 
