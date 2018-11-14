@@ -154,12 +154,12 @@ before you try any queries, especially if you are new to SQL or the SkyServer.
 
 <br><hr>
 
-<b><i>Mastar:</i></b>
-<br><a href="#mastarGStars">Mastar Selecting G-stars</a>
-<br><a href="#mastarClusterCtr">Mastar Stars near cluster center</a>
-<br><a href="#mastarHiVelStars">Mastar High-velocity stars</a>
-<br><a href="#mastarKDwarfs">Mastar K-type dwarfs using colors</a>
-<br><a href="#mastarInfoStars">Mastar Info from stars near cluster ctr</a>
+<b><i>MaStar:</i></b>
+<br><a href="#mastarGStars">MaStar Selecting G-stars</a>
+<br><a href="#mastarClusterCtr">MaStar Stars near cluster center</a>
+<br><a href="#mastarHiVelStars">MaStar High-velocity stars</a>
+<br><a href="#mastarKDwarfs">MaStar K-type dwarfs using colors</a>
+<br><a href="#mastarInfoStars">MaStar Info from stars near cluster ctr</a>
 
 <br>
 </td>
@@ -2110,7 +2110,7 @@ Some hints on searching SkyServer:</p>
 	showQuery( qName, qry, cmd, cmd );
 
 	qName = "mastarGStars";
-	qry = "Mastar Selecting G-stars";
+	qry = "MaStar Selecting G-stars";
 	cmd = tableDef;
 	cmd += "-- <i>Selecting G-stars from Mastar_Goodstars</i> <br>\r\n";
 	cmd += "-- This query returns the parameters for the first 50 G-stars in the mastar_goodstars table. <br>\r\n";
@@ -2118,7 +2118,7 @@ Some hints on searching SkyServer:</p>
 	cmd += "  <br>\r\n";
 	cmd += "SELECT <br>\r\n";
 	cmd += "&nbsp;&nbsp;&nbsp;&nbsp; TOP 100 mangaid, input_teff, input_logg, input_fe_h, input_alpha_m <br>\r\n";
-	cmd += "FROM Mastar_goodstars <br>\r\n";
+	cmd += "FROM MaStar_goodstars <br>\r\n";
 	cmd += "WHERE input_teff BETWEEN 5000 AND 6000 <br>\r\n";
 	cmd += " <br>\r\n";
 	cmd += "<br></td></tr>\r\n";
@@ -2127,7 +2127,7 @@ Some hints on searching SkyServer:</p>
 
 
 	qName = "mastarClusterCtr";
-	qry = "Mastar Stars near cluster center";
+	qry = "MaStar Stars near cluster center";
 	cmd = tableDef;
 	cmd += "-- <i>Selecting stars near cluster center</i> <br>\r\n";
 	cmd += "-- This query returns the coordinates and parameters for stars within 0.5 degrees of<br>\r\n";
@@ -2137,7 +2137,7 @@ Some hints on searching SkyServer:</p>
 	cmd += "SELECT <br>\r\n";
 	cmd += "&nbsp;&nbsp;&nbsp;&nbsp; TOP 100 mangaid, nvisits, objra, objdec, input_teff, input_teff, input_logg, <br>\r\n";
 	cmd += "&nbsp;&nbsp;&nbsp;&nbsp; input_fe_h, input_alpha_m <br>\r\n";
-	cmd += "FROM Mastar_goodstars <br>\r\n";
+	cmd += "FROM MaStar_goodstars <br>\r\n";
 	cmd += "WHERE  <br>\r\n";
 	cmd += "&nbsp;&nbsp;&nbsp;&nbsp; POWER(objra - 132.83, 2) + POWER(objdec - 11.82, 2) &lt; POWER(0.5, 2) <br>\r\n";
 	cmd += "&nbsp;&nbsp;&nbsp;&nbsp; AND nvisits &ge; 2 <br>\r\n";
@@ -2147,7 +2147,7 @@ Some hints on searching SkyServer:</p>
 	showQuery( qName, qry, cmd, cmd );
 
 	qName = "mastarHiVelStars";
-	qry = "Mastar High-velocity stars";
+	qry = "MaStar High-velocity stars";
 	cmd = tableDef;
 	cmd += "-- <i>High Velocity Stars in mastar_goodvisits</i> <br>\r\n";
 	cmd += "-- This query returns the gri magnitudes, radial velocities and uncertainties, <br>\r\n";
@@ -2156,7 +2156,7 @@ Some hints on searching SkyServer:</p>
 	cmd += "  <br>\r\n";
 	cmd += "SELECT <br>\r\n";
 	cmd += "&nbsp;&nbsp;&nbsp;&nbsp; TOP 100 mangaid, objra, objdec, psfmag_2, psfmag_3, psfmag_4, heliov, verr<br>\r\n";
-	cmd += "FROM Mastar_goodvisits <br>\r\n";
+	cmd += "FROM MaStar_goodvisits <br>\r\n";
 	cmd += "WHERE heliov &gt; 300 <br>\r\n";
 	cmd += "&nbsp;&nbsp;&nbsp;&nbsp; AND v_errcode = 0 <br>\r\n";
 	cmd += " <br>\r\n";
@@ -2165,7 +2165,7 @@ Some hints on searching SkyServer:</p>
 	showQuery( qName, qry, cmd, cmd );
 
 	qName = "mastarKDwarfs";
-	qry = "Mastar K-type dwarfs using colors";
+	qry = "MaStar K-type dwarfs using colors";
 	cmd = tableDef;
 	cmd += "-- <i>Search for K-type dwarfs using color criteria</i> <br>\r\n";
 	cmd += "-- This query searches for K-type dwarfs using color cuts from SEGUE. <br>\r\n";
@@ -2175,7 +2175,7 @@ Some hints on searching SkyServer:</p>
 	cmd += "  <br>\r\n";
 	cmd += "SELECT <br>\r\n";
 	cmd += "&nbsp;&nbsp;&nbsp;&nbsp; TOP 100 mangaid, psfmag_2, psfmag_3, psfmag_4, plate, IFUDESIGN <br>\r\n";
-	cmd += "FROM Mastar_goodvisits <br>\r\n";
+	cmd += "FROM MaStar_goodvisits <br>\r\n";
 	cmd += "WHERE  <br>\r\n";
 	cmd += "&nbsp;&nbsp;&nbsp;&nbsp; (mngtarg2 & POWER(2, 8)) <> 0 <br>\r\n";
 	cmd += "&nbsp;&nbsp;&nbsp;&nbsp; AND  psfmag_3 BETWEEN 14.5 AND 19.0 <br>\r\n";
@@ -2186,7 +2186,7 @@ Some hints on searching SkyServer:</p>
 	showQuery( qName, qry, cmd, cmd );
 
 	qName = "mastarInfoStars";
-	qry = "Mastar Info from stars near cluster center";
+	qry = "MaStar Info from stars near cluster center";
 	cmd = tableDef;
 	cmd += "-- <i>Retrieve parameters and observation information for stars near cluster center</i> <br>\r\n";
 	cmd += "-- This query joins the mastar_goodstars and mastar_goodvisits tables <br>\r\n";
