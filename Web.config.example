@@ -1,4 +1,4 @@
-<?xml version="1.0"?>
+<?xml version="1.0" encoding="utf-8"?>
 
 <!--
   For more information on how to configure your ASP.NET application, please visit
@@ -7,60 +7,141 @@
 
 <configuration>
     <system.web>
-        <compilation debug="true" targetFramework="4.0" />
+    <compilation debug="true" targetFramework="4.0" />
+	  <customErrors mode="Off" />
+	
     </system.web>
   <appSettings>
     <add key="PageInspector:ServerCodeMappingSupport" value="Disabled" />
-    
-    <add key="solarConnectionString" value="User ID=*****;Password=*****;Data Source=sdssdb002;Database=SDSS_EPO"/>
-    <add key="connectionString" value="User ID=*****;Password=*****;Data Source=SDSS3T;"/>
-    <add key="releaseNumber" value="12"/>
-    <add key="database" value="BESTDR12"/>
-    <add key="siteName" value=""/>
-    <add key="siteIcon" value="../images/flag_us.gif"/>
-    
-    <add key="wsBaseURL" value="http://skyservice.pha.jhu.edu/"/>
-    <add key="wsSpechome" value="http://www.voservices.net/spectrum/"/>
-    <add key="wsFilterhome" value="http://www.voservices.net/filter/"/>
-    
-    <add key="eqSearchRadius" value="0.75"/>
-    <add key="access" value="public"/>
-    <add key="dasUrlBase" value="http://dr12.sdss3.org/"/>
-    <add key="visualRA" value="132.749"/>
-    <add key="visualDec" value="11.656"/>
-    <add key="visualScale" value="0.79224"/>
-    <add key="exploreDefault" value="1237668296598749280"/>
-    <add key="sdssUrlBase" value="http://www.sdss.org/"/>
-	
-    <add key="logURL" value="http://skyserver.sdss.org/log/en/traffic/"/>
-    <add key="casJobs" value="http://skyserver.sdss.org/CasJobs/"/>
-    <add key="defaultSpRerun" value="26"/>
-    <add key="skyVersion" value="2"/>
-    <add key="epoHelp" value="raddick@pha.jhu.edu"/>
-    <add key="urlSolarSystemProj" value="http://skyserver.sdss.org/solarsystem/"/>
-    <add key="urlProjRegister" value="http://skyserver.pha.jhu.edu/register/"/>
-    <add key="apogeeSpectrumLink" value="http://dr12.sdss3.org/irSpectrumDetail" />
-    <add key="apogeeFitsLink" value="http://dr12.sdss3.org/sas/dr12/apogee/spectro/redux/" />
+    <!--Authentication System: KeyStone and Login portal-->
+    <add key="Keystone" value="true" />
+    <add key="Keystone.Login" value="http://apps.sciserver.org/login-portal/Account/Login?callbackUrl=" />
+    <add key="Keystone.Logout" value="http://apps.sciserver.org/login-portal/Account/Logout" />
+    <add key="Keystone.Portal" value="http://apps.sciserver.org/login-portal/" />
+    <add key="Keystone.Uri" value="http://***/" />
+    <add key="Keystone.AdminUser" value="***" />
+    <add key="Keystone.AdminTenant" value="***" />
+    <add key="Keystone.AdminPassword" value="***" />
+
+    <!-- Defining base URLs -->
+    <add key="skyserverBase" value="http://skyserver.sdss.org" />
+    <add key="restwebservice" value="http://skyserver.sdss.org/dr15/SkyServerWS/" />
+    <add key="casjobsRESTapi" value="http://skyserver.sdss.org/CasJobs/RestApi/contexts/dr15/query" />
+    <add key="skyqueryUrl" value="http://www.voservices.net/skyquery/" />
+
+    <!-- Misc URLs -->
+    <add key="wsBaseURL" value="http://skyservicetest.pha.jhu.edu/" /><!-- deprecated -->
+    <add key="wsSpechome" value="http://www.voservices.net/spectrum/" />
+    <add key="wsFilterhome" value="http://www.voservices.net/filter/" />
+    <add key="dasUrlBase" value="http://dr15.sdss.org/" />
+    <add key="logURL" value="http://skyserver.sdss.org/log/en/traffic/" />
+    <add key="casJobs" value="http://skyserver.sdss.org/CasJobs/" />
+    <add key="urlSolarSystemProj" value="http://skyserver.sdss3.org/solarsystem/" />
+    <add key="urlProjRegister" value="http://skyserver.pha.jhu.edu/register/" />
+    <add key="apogeeSpectrumLink" value="http://dr15.sdss.org/infrared/spectrum/view" />
+    <add key="apogeeFitsLink" value="http://dr15.sdss.org/sas/dr15/apogee/spectro/redux/" />
     <add key="sdssUrlBase" value="http://www.sdss.org/" />
     <add key="mangaUrlBase" value="http://data.sdss.org/sas/dr15/manga/spectro/redux/" />
-    <add key="marvinUrlBase" value="http://sas.sdss.org/marvin/" />	
-    <add key="helpdesk" value="helpdesk@sdss3.org"/>
-    <add key="smtp" value="mail.pha.jhu.edu"/>    
+	<add key="marvinUrlBase" value="http://sas.sdss.org/marvin/" />	
+    <add key="creditsUrl" value="http://www.sdss.org/collaboration/#image-use" />
+	
+	<!--MessageOfTheDayPath defines the location of the file containing html code that diplays the message of the day (motd). Can also define a custom motd.-->
+    <add key="MessageOfTheDayPath" value="~/motd-SkyServer.inc"/>
+
+    <!--Defines database connection for internal skyserver queries -->
+    <add key="connectionString" value="User ID=***;Password=***;Data Source=***;" />
+    <add key="releaseNumber" value="15" />
+    <add key="database" value="BestDR15" />
+    
+    <!-- misc params -->    
+    <add key="siteName" value="" /><!-- has the "test" keyword for the test site-->
+    <!-- <add key="siteIcon" value="../images/flag_us.gif" /> -->
+    <add key="siteIcon" value="flag_us.gif" />
+    <add key="eqSearchRadius" value="0.75" />
+    <add key="access" value="public" />
+    <add key="visualRA" value="179.689293428354" />
+    <add key="visualDec" value="-0.454379056007667" />
+    <add key="visualScale" value="0.79224" />
+    <add key="exploreDefault" value="1237662301903192106" />
+    <add key="defaultSpRerun" value="26" />
+    <add key="skyVersion" value="2" />
+    <add key="epoHelp" value="***@jhu.edu"/>
+    <add key="helpdesk" value="***@jhu.edu"/>
+    <add key="smtp" value="***.***.jhu.edu" />
 
     <!-- Timeouts and limits -->
-    <add key="defTimeout" value="600"/>
-    <add key="qaTimeout" value="3600"/>
-    <add key="sqlTimeout" value="600"/>
-    <add key="crossidTimeout" value="1800"/>
-    <add key="crossidRadius" value="3.0"/>
-    <add key="formTimeout" value="600"/>
-    <add key="chartTimeout" value="600"/>
-    <add key="emacsTimeout" value="600"/>
-    <add key="rowLimit" value="500000"/>
-    <add key="emacsRowLimit" value="500000"/>
-    <add key="queriesPerMinute" value="60"/>
+    <add key="defTimeout" value="600" />
+    <add key="qaTimeout" value="3600" />
+    <add key="sqlTimeout" value="600" />
+    <add key="crossidTimeout" value="1800" />
+    <add key="crossidRadius" value="3.0" />
+    <add key="formTimeout" value="600" />
+    <add key="chartTimeout" value="600" />
+    <add key="emacsTimeout" value="600" />
+    <add key="rowLimit" value="500000" />
+    <add key="emacsRowLimit" value="500000" />
+    <add key="queriesPerMinute" value="60" />
+    <!--TimeoutSkyserverWS = Timeout (milliseconds) for requests sent to SkyserverWS. Default value is 100000ms for HttpClient and HttpWebRequest-->
+    <add key="TimeoutSkyserverWS" value="600000" />
+    
+    <!-- For hidding the cross match tool until SkyQuery website is fully in production -->
+    <add key="DoShowCrossMatch" value="true" /> 
+    
+    <!-- Parameters for page showing History of users -->
+    <add key="UTC" value="Eastern Standard Time" /> <!-- Now deprecated. Timezone of the server where the logging takes place -->
+    <add key="DoShowAllHistory" value="false" /><!-- takes values "true" or "false". Choosing "false" shows only tools of interest and not every user's activity.  -->
+    <add key="RowsPerPageDefault" value="25" /><!-- number of rows per page of the history table-->
+    <add key="TopRowsDefault" value="50" /><!-- default total number of rows (orderd by time) of the history table when the user opens the page for the fisrt time -->
+    <add key="MaxRowsDisplayedDefault" value="50000" /><!-- maximum number of rows of the history table ever diplayed. Change accorgingly to improve rendering performance -->
+
+    <!-- Bug report url-->
+    <!-- 
+    <add key="BugReportURL" value="http://www.sciserver.org/bug-report/" /> 
+    -->
+    <add key="BugReportURL" value="http://www.sciserver.org/support/bug-report-and-suggestion-form/" />
+
+    <!-- Whether or not save results in all file formats (except html and CasJobs formats) as a file to the hard drive, instead of displaying them in the browser. Values "true" or "false"-->
+    <add key="SaveResponseToFile" value="true" />
+    
+    <!-- parameters defining the names of the keywords storing the ClientIP and referrer name in the header of the request sent from Skyserver-web-app to SkyserverWS. Must match the same names as defined in the SkyserverWS' web.config-->
+    <add key="IpHeaderName" value="SkyserverClientIP" />
+    <add key="RefererHeaderName" value="SkyserverReferrer" />
+    
+
   </appSettings>
   <system.webServer>
     <handlers accessPolicy="Read, Script" />
+
+    <security>
+      <requestFiltering>
+        <requestLimits maxQueryString="32768" />
+      </requestFiltering>
+            <authorization>
+                <remove users="*" roles="" verbs="" />
+                <add accessType="Allow" users="*" />
+            </authorization>	  
+    </security>
+        <directoryBrowse enabled="false" />
+    
   </system.webServer>
+  <!--<system.web>
+  <customErrors mode="RemoteOnly" defaultRedirect="http://localhost:6679/en/tools/explore/ExploreError.aspx" redirectMode="ResponseRewrite" />
+  </system.web>-->
+
+  <system.web>
+    <!--High values of maxQueryStringLength (default value=2048 characters) and maxUrlLength (default value=260 characters) make possible to take a long request string, such as those produced in imaging and spectro queries and user history in SkyServer -->
+    
+    <httpRuntime targetFramework="4.5" maxQueryStringLength="8192" maxUrlLength="8192" />
+  </system.web>
+
+
+  <runtime>
+    <assemblyBinding xmlns="urn:schemas-microsoft-com:asm.v1">
+      <dependentAssembly>
+        <assemblyIdentity name="Newtonsoft.Json" publicKeyToken="30ad4fe6b2a6aeed" culture="neutral" />
+        <bindingRedirect oldVersion="0.0.0.0-6.0.0.0" newVersion="6.0.0.0" />
+      </dependentAssembly>
+    </assemblyBinding>
+  </runtime>
+
 </configuration>
