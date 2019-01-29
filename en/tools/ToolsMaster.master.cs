@@ -78,7 +78,7 @@ namespace SkyServer.Tools
             //      }
             //  }
   
-              gutter += "6,Object Crossid,/tools/crossid/crossid.aspx;";
+              gutter += "6,CrossID,/tools/crossid/crossid.aspx;";
             // hiding the link until crossmatch is working      
               if (Boolean.Parse(ConfigurationManager.AppSettings["DoShowCrossMatch"].ToLower()))
               {

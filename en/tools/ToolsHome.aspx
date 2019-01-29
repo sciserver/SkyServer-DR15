@@ -53,7 +53,7 @@ You can even enter free-format SQL queries, or use a simple form to search the d
 
 <p>
 
-<a href="crossid/">Object Crossid</a> allows you to upload
+<a href="crossid/">CrossID</a> allows you to upload
 search the database for sky positions, objects with a 
 a list of object positions, and returns the SDSS objects
 which are within a certain radius of those positions.

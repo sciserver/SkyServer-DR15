@@ -161,7 +161,7 @@
 						<tr height="20">
 							<td nowrap class="menulink">
 							   <a class="menulink" href="tools/crossid/crossid.aspx">
-							     &nbsp;&nbsp;Cross-ID&nbsp;&nbsp;&nbsp;
+							     &nbsp;&nbsp;CrossID&nbsp;&nbsp;&nbsp;
 							   </a>
                             </td>
                         </tr>
