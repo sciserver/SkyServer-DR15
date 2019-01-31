@@ -82,7 +82,7 @@ namespace SkyServer.Tools
             // hiding the link until crossmatch is working      
               if (Boolean.Parse(ConfigurationManager.AppSettings["DoShowCrossMatch"].ToLower()))
               {
-                  gutter += "9,Skyquery CrossMatch<i><em><strong><sup> NEW!</sup></strong> </em></i>,/tools/crossmatch/crossmatch.aspx;";
+                  gutter += "9,Skyquery CrossMatch,/tools/crossmatch/crossmatch.aspx;";
               }
 
               if( globals.ReleaseNumber > 1 ) {
