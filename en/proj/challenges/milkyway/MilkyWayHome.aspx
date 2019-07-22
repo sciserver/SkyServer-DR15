@@ -57,7 +57,7 @@
       <p><a href="../../../tools/chart/navi.aspx" accesskey="s" target="tools">Sky Map</a> (globe on lower right of 
       Navigate): use this tool to find where in the sky the SDSS has looked. The brown stripe is the plane of the Milky Way. 
       If the tool doesn't work for you, see the diagram of <a href="../../../sdss/release/" target="tools">the SDSS's sky coverage</a>.</p>
-      <p><a href="../../../tools/search/form/form.aspx" accesskey="s" target="tools">Search Form</a>: use this tool to 
+      <p><a href="../../../tools/search/form/searchform.aspx" accesskey="s" target="tools">Search Form</a>: use this tool to 
       search for data on many stars. See the <a href="../../../tools/search/form/guide.aspx" target="tools" accesskey="g">
       user's guide</a> to learn how to use the tool.</p>
 
