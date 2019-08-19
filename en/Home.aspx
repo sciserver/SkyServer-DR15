@@ -252,7 +252,7 @@
 							<td nowrap class="menulink"><a class="menulink" target="offsite" href="<%=globals.SdssUrlBase%>dr<%=globals.ReleaseNumber%>/"> &nbsp;&nbsp;Data Release <%=globals.ReleaseNumber%> &nbsp;</a><img src="images/new_window.png" />&nbsp;&nbsp;</td>
 						</tr>
 						<tr height="20">
-							<td nowrap class="menulink"><a class="menulink" target="offsite"  href="<%=globals.SdssUrlBase%>/surveys/">&nbsp;&nbsp;Surveys&nbsp;</a><img src="images/new_window.png" />|<a class="menulink" target="offsite"  href="<%=globals.SdssUrlBase%>/instruments/">&nbsp;Instruments&nbsp;&nbsp;</a><img src="images/new_window.png" /></td>
+							<td nowrap class="menulink"><a class="menulink" target="offsite"  href="<%=globals.SdssUrlBase%>surveys/">&nbsp;&nbsp;Surveys&nbsp;</a><img src="images/new_window.png" />|<a class="menulink" target="offsite"  href="<%=globals.SdssUrlBase%>instruments/">&nbsp;Instruments&nbsp;&nbsp;</a><img src="images/new_window.png" /></td>
 						</tr>												
 						<tr height="20">
 							<td nowrap class="menulink"><a class="menulink" href="<%=globals.SdssUrlBase%>science/">&nbsp;&nbsp;SDSS Science &nbsp;</a><img src="images/offsite.png" />&nbsp;&nbsp;</td>
@@ -289,15 +289,15 @@
 						<tr height="20">
 							<td nowrap class="menulink"><a class="menulink" href="help/docs/introduction.aspx">&nbsp;&nbsp;Start Here</a>&nbsp;&nbsp;|
 							&nbsp;
-							<a class="menulink" target="offsite" href="<%=globals.SdssUrl%>help/">FAQ &nbsp;</a><img src="images/new_window.png" />
+							<a class="menulink" target="offsite" href="<%=globals.SdssUrl%>help/faq/">FAQ &nbsp;</a><img src="images/new_window.png" />
 							</td>
 						</tr>
 						<tr height="20">
-							<td nowrap class="menulink"><a class="menulink" target="offsite" href="<%=globals.SdssUrl%>/glossary">&nbsp;&nbsp;Glossary &nbsp;</a><img src="images/new_window.png" />						
+							<td nowrap class="menulink"><a class="menulink" target="offsite" href="<%=globals.SdssUrl%>help/glossary">&nbsp;&nbsp;Glossary &nbsp;</a><img src="images/new_window.png" />						
 							&nbsp;&nbsp;</td>
 						</tr>
 						<tr height="20">
-							<td nowrap class="menulink"><a class="menulink" target="offsite" href="<%=globals.SdssUrl%>/algorithms">&nbsp;&nbsp;Algorithms &nbsp;</a><img src="images/new_window.png" />						
+							<td nowrap class="menulink"><a class="menulink" target="offsite" href="<%=globals.SdssUrl%>algorithms">&nbsp;&nbsp;Algorithms &nbsp;</a><img src="images/new_window.png" />						
 							&nbsp;&nbsp;</td>
 						</tr>
 <!--
