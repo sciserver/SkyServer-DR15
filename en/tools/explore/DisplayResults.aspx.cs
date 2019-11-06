@@ -21,6 +21,7 @@ namespace SkyServer.Tools.Explore
         protected string fieldId = null;
         protected Globals globals;
         protected string Name = null;
+        protected string description = null;
 
         protected ObjectExplorer master;
         protected DataSet ds;
@@ -47,6 +48,7 @@ namespace SkyServer.Tools.Explore
                 //cmd = Request.QueryString["cmd"];
                 name = Request.QueryString["name"];
                 url = Request.QueryString["url"];
+                description = Request.QueryString["description"];
             }
 
             string URIparams = "?id=" + objId + "&spec=" + specId + "&apid=" + apid + "&fieldId=" + fieldId + "&query=" + name + "&TaskName=Skyserver.Explore.DisplayResults." + name;
@@ -55,6 +57,11 @@ namespace SkyServer.Tools.Explore
                 Name = name.Substring(0,name.Length - 5);
             else
                 Name = name;
+
+            if (String.IsNullOrEmpty(description))
+            {
+                description = Name;
+            }
 
             //if(cmd == null || cmd.Equals(""))
             //    getQuery();

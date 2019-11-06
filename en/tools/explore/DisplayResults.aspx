@@ -11,7 +11,7 @@
    <div id="QueryResults">
        <%url = master.getURL(); %>
     <p />
-     <h2><a href="<%=url%>/help/browser/browser.aspx?cmd=description+<%=Name%>+U" target="_top" class="content"><%=Name%></a></h2>
+     <h2><a href="<%=url%>/help/browser/browser.aspx?cmd=description+<%=description%>+U" target="_top" class="content"><%=description%></a></h2>
     <p />   
     <%
         master.showVTable(ds, 300);   // put the option for Plate Objects   

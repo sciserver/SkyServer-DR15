@@ -139,7 +139,7 @@ namespace SkyServer.Tools.Explore
 
             //WISE
             //linkQuery = ExplorerQueries.wiseLinkCrossId.Replace("@objId", objId);
-            linkQuery = "./DisplayResults.aspx?id="+ objId.ToString() + "&name=wiseLinkCrossId";
+            linkQuery = "./DisplayResults.aspx?id="+ objId.ToString() + "&name=wiseLinkCrossId&description=wise_allsky";
 
 
             using (DataTableReader reader = ((DataSet)Session["LoadExplore"]).Tables["CrossId_WISE"].CreateDataReader())
