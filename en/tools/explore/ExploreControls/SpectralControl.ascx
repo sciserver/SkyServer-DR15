@@ -11,7 +11,7 @@
                   <p><b> SpecObjID = <%=specObjId%></b></p>                
                 </td>
                 <td width="40%">
-                    <% string spectrumlink = globals.DasUrl + "optical/spectrum/view?plateid=" + plate + "&mjd=" + mjd + "&fiberid=" + fiberid + "&run2d=" + run2d; %>
+                    <% string spectrumlink = globals.DasUrl + "optical/spectrum/view?plateid=" + plate + "&mjd=" + mjd + "&fiberid=" + fiberid + "&run2d=" + run2d + "&zwarning=0&matches=any" ; %>
                     <p><b>
                       <a class='content' href="<%=spectrumlink%>"  target='_blank'>
                           Interactive spectrum<img src='../../images/new_window_black.png' alt=' (new window)' />
