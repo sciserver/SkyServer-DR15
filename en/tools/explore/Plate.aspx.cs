@@ -14,7 +14,7 @@ namespace SkyServer.Tools.Explore
 {
     public partial class Plate : System.Web.UI.Page
     {
-        protected long? plateId = null;
+        protected decimal? plateId = null;
         protected Globals globals;
         protected ObjectExplorer master;
         protected RunQuery runQuery;
@@ -25,15 +25,16 @@ namespace SkyServer.Tools.Explore
         protected void Page_Load(object sender, EventArgs e)
         {
             globals = (Globals)Application[Globals.PROPERTY_NAME];
-            master = (ObjectExplorer)Page.Master;            
-            string s = Request.QueryString["plateId"];            
-            plateId = Utilities.ParseId(s);                      
+            master = (ObjectExplorer)Page.Master;
+            string s = Request.QueryString["plateId"];
+            plateId = Convert.ToDecimal(s);
             runQuery = new RunQuery();
             executeQuery();
         }
 
-        private void executeQuery() {
-            string cmd = ExplorerQueries.Plate.Replace("@plateId",plateId.ToString());
+        private void executeQuery()
+        {
+            string cmd = ExplorerQueries.Plate.Replace("@plateId", plateId.ToString());
             //ds = runQuery.RunCasjobs(cmd,"Explore: Plates");
             //ds = runQuery.RunDatabaseSearch(cmd, globals.ContentDataset, ClientIP, "Skyserver.Explore.Plate.getPlate");
 
@@ -66,7 +67,7 @@ namespace SkyServer.Tools.Explore
                 Response.Write("<tr>");
                 while (reader.Read())
                 {
-                    specObjId = reader["specObjId"] is DBNull ? null : Functions.BytesToHex((byte[])reader["specObjId"]);
+                    specObjId = reader["specObjId"] is DBNull ? null : reader["specObjId"].ToString();
                     sid = u + specObjId + "'>";
                     string v = "[" + reader.GetValue(1).ToString() + "]&nbsp;";
                     v += reader.GetValue(2).ToString() + " z=" + reader.GetValue(3).ToString();
