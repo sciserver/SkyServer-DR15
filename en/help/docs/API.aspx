@@ -580,7 +580,7 @@
 		user defined list of object positions. The images are linked to the
 		other tools. The list can also be specified with a query. The page can be called via HTTP POST. <br>
 	You will need a form such as the following :
-	<pre cls="sml">&lt;form action="<%=url%>/tools/chart/showlist.aspx"
+	<pre cls="sml">&lt;form action="<%=url%>/tools/chart/list.aspx"
 method="post">
 &lt;TEXTAREA name="paste">
     ra     dec  
