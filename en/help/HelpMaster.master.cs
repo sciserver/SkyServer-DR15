@@ -59,7 +59,7 @@ namespace SkyServer.Help
             gutter += "11,About the Database,/help/docs/intro.aspx;";
             gutter += "16,Table Descriptions,/help/docs/tabledesc.aspx;";
             gutter += "1,Schema Browser,/help/browser/browser.aspx;";
-            gutter += "4,Glossary," + globals.SdssUrl + "glossary.php;";
+            gutter += "4,Glossary," + globals.SdssUrl + "help/glossary/;";
             gutter += "5,Algorithms," + globals.SdssUrl + "algorithms/;";
 
             //  gutter += "19,Data Publications,/sdss/pubs/;";
