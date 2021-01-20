@@ -113,7 +113,7 @@ namespace SkyServer.Tools.QuickLook
 
                     objectInfo.mjd = reader["mjd"] is DBNull ? null : (int?)reader["mjd"];
                     objectInfo.plate = reader["plate"] is DBNull ? null : (short?)reader["plate"];
-                    objectInfo.plateId = reader["plateId"] is DBNull ? null : Functions.BytesToHex((byte[])reader["plateId"]);
+                    objectInfo.plateId = reader["plateId"] is DBNull ? null : reader["plateId"].ToString();
                     objectInfo.fiberId = reader["fiberid"] is DBNull ? null : (short?)reader["fiberid"];
                     objectInfo.fieldId = reader["fieldId"] is DBNull ? null : Functions.BytesToHex((byte[])reader["fieldId"]);
 

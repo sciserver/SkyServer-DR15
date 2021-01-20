@@ -83,7 +83,7 @@
                 <%if (specObjId != null && !ZERO_ID.Equals(specObjId)) { %>
                               
                     <td align='center' valign='top' width='50%'>
-                            <% string spectrumlink = globals.DasUrl + "optical/spectrum/view?plateid=" + plate + "&mjd=" + mjd + "&fiberid=" + fiberid + "&run2d=" + run2d;%>
+                            <% string spectrumlink = globals.DasUrl + "optical/spectrum/view?plateid=" + plate + "&mjd=" + mjd + "&fiberid=" + fiberid + "&run2d=" + run2d + "&zwarning=0&matches=any";%>
                             <h3><a href="<%=spectrumlink%>" target='_blank' class='content'>Interactive spectrum<img src='../../images/new_window_black.png' alt=' (new window)' /></a></h3>
                             <p><b>Spectral classification (Class):</b> <%= spectralclass %></p>
                             <table cellpadding=2 cellspacing=2 border=0 width=250>
