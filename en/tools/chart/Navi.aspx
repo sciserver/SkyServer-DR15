@@ -41,8 +41,8 @@
     <script type="text/javascript">var release = "<%= globals.Release %>";</script>
     <!--For icon and header-->
     <script id="Script1" type="text/javascript" language='javascript' src='../STARTBall/STARTBall.js'></script>    
-    <script type="text/javascript" src="http://code.jquery.com/jquery-1.7.js"></script>    
-    <script type="text/javascript"  src="http://code.jquery.com/jquery-1.7.2.min.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.7.js"></script>    
+    <script type="text/javascript"  src="https://code.jquery.com/jquery-1.7.2.min.js"></script>
     
     <script type="text/javascript"  src="./javascript/control.js"></script>    
     <script type="text/javascript"  src="./javascript/hammer.js"></script>
