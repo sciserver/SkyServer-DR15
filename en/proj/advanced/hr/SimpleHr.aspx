@@ -55,7 +55,7 @@
         <tr>
           <td width="150" height="18"><p>Canopus</p></td>
           <TD height=18 width="150"><p>-0.72</p></TD>
-          <td width="150" height="18"><p>-2.5</p></td>
+          <td width="150" height="18"><p>-5.6</p></td>
           <td width="200" height="18"><p>0.15</p></td>
         </tr>
         <tr>
