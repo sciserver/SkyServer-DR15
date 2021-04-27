@@ -135,7 +135,7 @@ namespace SkyServer.Tools.Explore
                 hrefs.sppLines = "DisplayResults.aspx?name=sppLinesQuery&" + allId;
                 hrefs.sppParams = "DisplayResults.aspx?name=sppParamsQuery&" + allId;
                 hrefs.galSpecLine = "DisplayResults.aspx?name=galSpecLineQuery&" + allId;
-                hrefs.galSpecIndx = "DisplayResults.aspx?name=galSpecIndexQuery&" + allId;
+                hrefs.galSpecIndx = "DisplayResults.aspx?name=galSpecIndxQuery&" + allId;
                 hrefs.galSpecInfo = "DisplayResults.aspx?name=galSpecInfoQuery&" + allId;
 
                 hrefs.Plate = "plate.aspx?&name=Plate&" + allId;
