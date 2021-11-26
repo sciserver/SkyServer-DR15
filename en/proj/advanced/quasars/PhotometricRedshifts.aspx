@@ -24,7 +24,7 @@
           
           <p>In December 2000, the SDSS collaboration published 
           a paper with graphs like the ones you made. To compare your graphs to theirs, click 
-          <a target="offsite" href="http://xxx.lanl.gov/abs/astro-ph/0012449">here</a> to 
+          <a target="offsite" href="https://arxiv.org/abs/astro-ph/0012449">here</a> to 
           download their paper from the Los Alamos Astrophysical Preprint Server.
           Click "Other Formats," then select "Download PDF." (You will need to download 
           Adobe Acrobat Reader to view this file. Click <a target="help" 

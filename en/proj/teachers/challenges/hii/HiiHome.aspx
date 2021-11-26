@@ -75,7 +75,7 @@
       <p>The goal of this challenge is to create a catalog of HII regions that 
       could be used for research. SDSS astronomers just published a similar 
       catalog of quasars from SDSS's early data release. You can see the research paper 
-      where they explain their results <a target="_blank" href="http://xxx.lanl.gov/PS_cache/astro-ph/pdf/0012/0012449.pdf">
+      where they explain their results <a target="_blank" href="https://arxiv.org/PS_cache/astro-ph/pdf/0012/0012449.pdf">
       here</a>. (The paper is a .pdf file, and you will need Adobe Acrobat Reader to view it. 
       If you do not already have the reader, you can download it free from 
       <a target="_blank" href="http://www.adobe.com/products/acrobat/readstep2.html">Adobe's 

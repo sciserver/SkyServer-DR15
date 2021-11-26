@@ -126,7 +126,7 @@
       <p>SDSS astronomers recently analyzed over 147,000 galaxies and created a diagram similar to the one you made in Exercise 5. 
       If you are interested in some challenging reading, you can download the 
       paper they published 
-      <a href="#astropaper" onclick="window.open('http://xxx.lanl.gov/abs/astro-ph/0107201');">
+      <a href="#astropaper" onclick="window.open('https://arxiv.org/abs/astro-ph/0107201');">
       here</a> (to see the paper as a .pdf file, click Other Formats, then Download PDF).</p>
       </td>
     </tr>

@@ -99,7 +99,7 @@
       <p>SDSS astronomers looked at many galaxies in the early data release and learned to 
       classify them based on color. They found that a u-r color of 
       2.22 separated early galaxies from late galaxies (you can read the entire 
-      paper <a href="http://xxx.lanl.gov/abs/astro-ph/0107201">here</a>).</p>
+      paper <a href="https://arxiv.org/abs/astro-ph/0107201">here</a>).</p>
       <p>Their method is not perfect because there is contamination from 
       other galaxy types. However, the method can be used to pefrorm statistical analysis of 
       groups and clusters of galaxies where visual classification would be 
