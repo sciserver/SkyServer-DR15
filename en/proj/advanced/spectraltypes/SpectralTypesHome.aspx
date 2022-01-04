@@ -51,7 +51,7 @@
       the spectrum of a star:</p>
       <table width=600 border="0" align=center cellpadding="0" cellspacing="0"><tr>
           <td>
-         <A href="../../../get/specById.aspx?ID=75094093054607360" target="pictures">
+         <A href="../../../get/SpecByPF.ashx?P=299489402567026688&F=21" target="pictures">
          <IMG src="images/spectra1.gif">
          </A></td></tr><tr><td><p align="center"><span class=caption>
          Click on the image to see it full size</span></p></td></tr></table>
