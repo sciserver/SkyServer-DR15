@@ -180,7 +180,7 @@
       <a name="samplespec"></a>
       <table border="0" align=center cellpadding="0" cellspacing="0"><tr>
           <td>
-         <A href="../../../get/specById.aspx?ID=75094093029441536" target="pictures">
+         <A href="../../../get/specById.ashx?ID=299493525735630848" target="pictures">
          <IMG border=1 src="images/spectra1.gif"></A></td></tr>
          <tr><td><p align="center"><span class=caption>
          Click on the image to see it full size</span></p></td></tr></table>
