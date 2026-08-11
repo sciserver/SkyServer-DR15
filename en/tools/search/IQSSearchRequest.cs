@@ -134,7 +134,10 @@ namespace SkyServer.Tools.Search
 
                     if (request.Files.Count > 0 && request.Files[0].ContentLength > 0)
                     {
-                        val = (new StreamReader(request.Files[0].InputStream)).ReadToEnd();
+                        using (StreamReader proxReader = new StreamReader(request.Files[0].InputStream))
+                        {
+                            val = proxReader.ReadToEnd();
+                        }
                         paste = Regex.Split(val, RE_SPLIT);
                         if (paste.Length > 0)
                         {

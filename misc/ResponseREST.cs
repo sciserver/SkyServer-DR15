@@ -152,7 +152,10 @@ namespace SkyServer.Tools.Search
                 bool HasTextList = false;
                 if (Request.Files.Count > 0 && Request.Files[0].ContentLength > 0)
                 {
-                    radecText = (new StreamReader(Request.Files[0].InputStream)).ReadToEnd();
+                    using (StreamReader fileReader = new StreamReader(Request.Files[0].InputStream))
+                    {
+                        radecText = fileReader.ReadToEnd();
+                    }
                     HasFile = true;
                 }
                 else
@@ -204,60 +207,58 @@ namespace SkyServer.Tools.Search
 
             Globals globals = new Globals();
             /// Once the authenticated skyserver is ready, we can update the code to retrieve token          
-            HttpClient client = new HttpClient();
-            client.BaseAddress = new Uri(serviceUrl);
-            client.Timeout = new TimeSpan(0, 0, 0, globals.TimeoutSkyserverWS);// default is 100000ms
-            string requestUri = client.BaseAddress + "?" + requestString;
-            
-            string queryResult = "";
-            byte[]  queryResultByte = null;
-            HttpResponseMessage respMessage = null;
-            StringContent content = null;
-
-            if (uploaded == null || uploaded.Equals(""))
-                content = new StringContent("");
-            else 
-                content = new StringContent(uploaded);
-
-            client.DefaultRequestHeaders.Add(ClientIpHeaderName, GetClientIP());
-            client.DefaultRequestHeaders.Referrer = HttpContext.Current.Request.UrlReferrer != null ? HttpContext.Current.Request.UrlReferrer : HttpContext.Current.Request.Url;
-
-            if (!(token == null || token == String.Empty))
-                content.Headers.Add("X-Auth-Token", token);
-
-            if (!HttpContext.Current.Request.Cookies.AllKeys.Contains("ASP.NET_SessionId"))
+            using (HttpClient client = new HttpClient())
             {
-                try
+                client.BaseAddress = new Uri(serviceUrl);
+                client.Timeout = new TimeSpan(0, 0, 0, globals.TimeoutSkyserverWS);// default is 100000ms
+                string requestUri = client.BaseAddress + "?" + requestString;
+
+                string queryResult = "";
+                byte[] queryResultByte = null;
+
+                using (StringContent content = new StringContent((uploaded == null || uploaded.Equals("")) ? "" : uploaded))
                 {
-                    HttpContext.Current.Request.Cookies.Add(new HttpCookie("ASP.NET_SessionId", System.Web.HttpContext.Current.Session.SessionID));
+                    client.DefaultRequestHeaders.Add(ClientIpHeaderName, GetClientIP());
+                    client.DefaultRequestHeaders.Referrer = HttpContext.Current.Request.UrlReferrer != null ? HttpContext.Current.Request.UrlReferrer : HttpContext.Current.Request.Url;
+
+                    if (!(token == null || token == String.Empty))
+                        content.Headers.Add("X-Auth-Token", token);
+
+                    if (!HttpContext.Current.Request.Cookies.AllKeys.Contains("ASP.NET_SessionId"))
+                    {
+                        try
+                        {
+                            HttpContext.Current.Request.Cookies.Add(new HttpCookie("ASP.NET_SessionId", System.Web.HttpContext.Current.Session.SessionID));
+                        }
+                        catch { };
+                    }
+                    //posting the request and getting the result back.
+                    using (HttpResponseMessage respMessage = client.PostAsync(requestUri, content).Result)
+                    {
+                        //respMessage.EnsureSuccessStatusCode();
+                        if (respMessage.IsSuccessStatusCode)
+                            if (returnType == "fits")
+                                queryResultByte = respMessage.Content.ReadAsByteArrayAsync().Result;
+                            else
+                                queryResult = respMessage.Content.ReadAsStringAsync().Result;
+                        else
+                        {
+                            string ErrorMessage = respMessage.Content.ReadAsStringAsync().Result;
+                            queryResult = getErrorMessageHTMLresult(ErrorMessage);
+                            returnType = "html";
+                            //throw new ApplicationException("Query did not return results successfully, check input and try again later.");
+                        }
+
+                        setContentType(returnType);
+                        if (returnType == "fits" || returnType == "dataset")
+                            httpResponse.BinaryWrite(queryResultByte);
+                        else
+                            httpResponse.Output.Write(queryResult);
+
+                        httpResponse.End();
+                    }
                 }
-                catch { };
             }
-            //posting the request and getting the result back.
-            respMessage = client.PostAsync(requestUri, content).Result;
-
-
-            //respMessage.EnsureSuccessStatusCode();
-            if (respMessage.IsSuccessStatusCode)
-                if (returnType=="fits")
-                    queryResultByte = respMessage.Content.ReadAsByteArrayAsync().Result;
-                else
-                    queryResult = respMessage.Content.ReadAsStringAsync().Result;
-            else
-            {
-                string ErrorMessage = respMessage.Content.ReadAsStringAsync().Result;
-                queryResult = getErrorMessageHTMLresult(ErrorMessage);
-                returnType = "html";
-                //throw new ApplicationException("Query did not return results successfully, check input and try again later.");
-            }
-
-            setContentType(returnType);
-            if (returnType=="fits" || returnType=="dataset")
-                httpResponse.BinaryWrite(queryResultByte);
-            else
-                httpResponse.Output.Write(queryResult);
-            
-            httpResponse.End();
             //if (returnType.ToLower().Equals("html"))
             //    //httpResponse.Write(JsonToHtml(queryResult));
             //    httpResponse.Write(queryResult);
@@ -514,15 +515,17 @@ namespace SkyServer.Tools.Search
                 string Referrer = HttpContext.Current.Request.UrlReferrer != null ? HttpContext.Current.Request.UrlReferrer.ToString() : HttpContext.Current.Request.Url.ToString();
                 req.Headers.Add(ReferrerHeaderName, Referrer);
 
-                WebResponse resp = req.GetResponse();
-                BinaryFormatter fmt = new BinaryFormatter();
-                DataSet ds = new DataSet();
-                ds = (DataSet)fmt.Deserialize(resp.GetResponseStream());
-                return ds;
+                using (WebResponse resp = req.GetResponse())
+                {
+                    BinaryFormatter fmt = new BinaryFormatter();
+                    DataSet ds = new DataSet();
+                    ds = (DataSet)fmt.Deserialize(resp.GetResponseStream());
+                    return ds;
+                }
             }
             catch (WebException e)
             {
-                WebResponse resp = e.Response;
+                using (WebResponse resp = e.Response)
                 using (StreamReader reader = new StreamReader(resp.GetResponseStream()))
                 {
                     ErrorMessage = reader.ReadToEnd();
@@ -548,22 +551,23 @@ namespace SkyServer.Tools.Search
                 if (!token.Equals("") && token != null)
                     request.Headers.Add("X-Auth-Token", token);
 
-                StreamWriter streamWriter = new StreamWriter(request.GetRequestStream());
-                StringWriter sw = new StringWriter();
-                JsonWriter jsonWriter = new JsonTextWriter(sw);
-                jsonWriter.WriteStartObject();
-                jsonWriter.WritePropertyName("Query");
-                jsonWriter.WriteValue(command);
-                jsonWriter.WritePropertyName("TaskName");
-                jsonWriter.WriteValue(taskname);
-                jsonWriter.WritePropertyName("ClientIP");
-                jsonWriter.WriteValue(ClientIP);
-                //jsonWriter.WritePropertyName("ReturnDataSet");
-                //jsonWriter.WriteValue(true);
-                jsonWriter.WriteEndObject();
-                jsonWriter.Close();
-                streamWriter.Write(sw.ToString());
-                streamWriter.Close();
+                using (StreamWriter streamWriter = new StreamWriter(request.GetRequestStream()))
+                {
+                    StringWriter sw = new StringWriter();
+                    JsonWriter jsonWriter = new JsonTextWriter(sw);
+                    jsonWriter.WriteStartObject();
+                    jsonWriter.WritePropertyName("Query");
+                    jsonWriter.WriteValue(command);
+                    jsonWriter.WritePropertyName("TaskName");
+                    jsonWriter.WriteValue(taskname);
+                    jsonWriter.WritePropertyName("ClientIP");
+                    jsonWriter.WriteValue(ClientIP);
+                    //jsonWriter.WritePropertyName("ReturnDataSet");
+                    //jsonWriter.WriteValue(true);
+                    jsonWriter.WriteEndObject();
+                    jsonWriter.Close();
+                    streamWriter.Write(sw.ToString());
+                }
 
                 DataSet ds = null;
                 using (System.Net.HttpWebResponse response = (System.Net.HttpWebResponse)request.GetResponse())
@@ -599,20 +603,21 @@ namespace SkyServer.Tools.Search
                 if (!token.Equals("") && token != null)
                     request.Headers.Add("X-Auth-Token", token);
 
-                StreamWriter streamWriter = new StreamWriter(request.GetRequestStream());
-                StringWriter sw = new StringWriter();
-                JsonWriter jsonWriter = new JsonTextWriter(sw);
-                jsonWriter.WriteStartObject();
-                jsonWriter.WritePropertyName("Query");
-                jsonWriter.WriteValue(command);
-                jsonWriter.WritePropertyName("TaskName");
-                jsonWriter.WriteValue(taskname);
-                //jsonWriter.WritePropertyName("ReturnDataSet");
-                //jsonWriter.WriteValue(true);
-                jsonWriter.WriteEndObject();
-                jsonWriter.Close();
-                streamWriter.Write(sw.ToString());
-                streamWriter.Close();
+                using (StreamWriter streamWriter = new StreamWriter(request.GetRequestStream()))
+                {
+                    StringWriter sw = new StringWriter();
+                    JsonWriter jsonWriter = new JsonTextWriter(sw);
+                    jsonWriter.WriteStartObject();
+                    jsonWriter.WritePropertyName("Query");
+                    jsonWriter.WriteValue(command);
+                    jsonWriter.WritePropertyName("TaskName");
+                    jsonWriter.WriteValue(taskname);
+                    //jsonWriter.WritePropertyName("ReturnDataSet");
+                    //jsonWriter.WriteValue(true);
+                    jsonWriter.WriteEndObject();
+                    jsonWriter.Close();
+                    streamWriter.Write(sw.ToString());
+                }
 
                 DataSet ds = null;
                 using (System.Net.HttpWebResponse response = (System.Net.HttpWebResponse)request.GetResponse())
@@ -649,18 +654,19 @@ namespace SkyServer.Tools.Search
                 if (!token.Equals("") && token != null)
                     request.Headers.Add("X-Auth-Token", token);
 
-                StreamWriter streamWriter = new StreamWriter(request.GetRequestStream());
-                StringWriter sw = new StringWriter();
-                JsonWriter jsonWriter = new JsonTextWriter(sw);
-                jsonWriter.WriteStartObject();
-                jsonWriter.WritePropertyName("Query");
-                jsonWriter.WriteValue(command);
-                //jsonWriter.WritePropertyName("ReturnDataSet");
-                //jsonWriter.WriteValue(true);
-                jsonWriter.WriteEndObject();
-                jsonWriter.Close();
-                streamWriter.Write(sw.ToString());
-                streamWriter.Close();
+                using (StreamWriter streamWriter = new StreamWriter(request.GetRequestStream()))
+                {
+                    StringWriter sw = new StringWriter();
+                    JsonWriter jsonWriter = new JsonTextWriter(sw);
+                    jsonWriter.WriteStartObject();
+                    jsonWriter.WritePropertyName("Query");
+                    jsonWriter.WriteValue(command);
+                    //jsonWriter.WritePropertyName("ReturnDataSet");
+                    //jsonWriter.WriteValue(true);
+                    jsonWriter.WriteEndObject();
+                    jsonWriter.Close();
+                    streamWriter.Write(sw.ToString());
+                }
 
                 DataSet ds = null;
                 using (System.Net.HttpWebResponse response = (System.Net.HttpWebResponse)request.GetResponse())

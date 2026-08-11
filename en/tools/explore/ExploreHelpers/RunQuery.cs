@@ -64,20 +64,21 @@ namespace SkyServer.Tools.Explore
                 if(!token.Equals("") && token != null)
                     request.Headers.Add("X-Auth-Token", token);
 
-                StreamWriter streamWriter = new StreamWriter(request.GetRequestStream());
-                StringWriter sw = new StringWriter();
-                JsonWriter jsonWriter = new JsonTextWriter(sw);
-                jsonWriter.WriteStartObject();
-                jsonWriter.WritePropertyName("Query");
-                jsonWriter.WriteValue(command);
-                jsonWriter.WritePropertyName("TaskName");
-                jsonWriter.WriteValue(taskname);
-                //jsonWriter.WritePropertyName("ReturnDataSet");
-                //jsonWriter.WriteValue(true);
-                jsonWriter.WriteEndObject();
-                jsonWriter.Close();
-                streamWriter.Write(sw.ToString());
-                streamWriter.Close();
+                using (StreamWriter streamWriter = new StreamWriter(request.GetRequestStream()))
+                {
+                    StringWriter sw = new StringWriter();
+                    JsonWriter jsonWriter = new JsonTextWriter(sw);
+                    jsonWriter.WriteStartObject();
+                    jsonWriter.WritePropertyName("Query");
+                    jsonWriter.WriteValue(command);
+                    jsonWriter.WritePropertyName("TaskName");
+                    jsonWriter.WriteValue(taskname);
+                    //jsonWriter.WritePropertyName("ReturnDataSet");
+                    //jsonWriter.WriteValue(true);
+                    jsonWriter.WriteEndObject();
+                    jsonWriter.Close();
+                    streamWriter.Write(sw.ToString());
+                }
 
                 DataSet ds = null;
                 using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())

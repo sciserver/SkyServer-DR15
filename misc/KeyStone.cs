@@ -39,15 +39,15 @@ namespace SkyServer
             {
                 try
                 {
-                    var request = new HttpRequestMessage(HttpMethod.Get, "keystone/v3/tokens/" + token);
+                    using (var request = new HttpRequestMessage(HttpMethod.Get, "keystone/v3/tokens/" + token))
+                    using (var response = client.SendAsync(request).Result.EnsureSuccessStatusCode())
+                    {
+                        JObject json = JObject.Parse(response.Content.ReadAsStringAsync().Result);
 
-                    var response = client.SendAsync(request).Result.EnsureSuccessStatusCode();
+                        UserAccess userAccess = new UserAccess(json);
 
-                    JObject json = JObject.Parse(response.Content.ReadAsStringAsync().Result);
-
-                    UserAccess userAccess = new UserAccess(json);
-
-                    return userAccess;
+                        return userAccess;
+                    }
                 }
                 catch
                 {
@@ -64,9 +64,11 @@ namespace SkyServer
             {
                 using (var client = new HttpClient() { BaseAddress = new Uri(ConfigurationManager.AppSettings["LoginPortal.Base"]) })
                 {
-                    var request = new HttpRequestMessage(HttpMethod.Head, "keystone/v3/tokens/" + token);
-                    var response = client.SendAsync(request).Result;
-                    return response.IsSuccessStatusCode;
+                    using (var request = new HttpRequestMessage(HttpMethod.Head, "keystone/v3/tokens/" + token))
+                    using (var response = client.SendAsync(request).Result)
+                    {
+                        return response.IsSuccessStatusCode;
+                    }
                 }
             }
             catch

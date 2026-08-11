@@ -50,11 +50,13 @@ namespace SkyServer.Tools.QuickLook
         {
 
             WebRequest req = WebRequest.Create(WSrequestUri + "?cmd=" + Uri.EscapeDataString(command) + "&format=" + format + "&clientIP=" + ClientIP + "&task=" + TaskName);//select%20top%2010%20ra,dec%20from%20Frame&format=csv"
-            WebResponse resp = req.GetResponse();
-            BinaryFormatter fmt = new BinaryFormatter();
-            DataSet ds = new DataSet();
-            ds = (DataSet)fmt.Deserialize(resp.GetResponseStream());
-            return ds;
+            using (WebResponse resp = req.GetResponse())
+            {
+                BinaryFormatter fmt = new BinaryFormatter();
+                DataSet ds = new DataSet();
+                ds = (DataSet)fmt.Deserialize(resp.GetResponseStream());
+                return ds;
+            }
             //Stream s = resp.GetResponseStream();
             //StreamReader sr = new StreamReader(s, Encoding.ASCII);
             //string doc = sr.ReadToEnd();
@@ -83,20 +85,21 @@ namespace SkyServer.Tools.QuickLook
                 if(!token.Equals("") && token != null)
                     request.Headers.Add("X-Auth-Token", token);
 
-                StreamWriter streamWriter = new StreamWriter(request.GetRequestStream());
-                StringWriter sw = new StringWriter();
-                JsonWriter jsonWriter = new JsonTextWriter(sw);
-                jsonWriter.WriteStartObject();
-                jsonWriter.WritePropertyName("Query");
-                jsonWriter.WriteValue(command);
-                jsonWriter.WritePropertyName("TaskName");
-                jsonWriter.WriteValue(taskname);
-                //jsonWriter.WritePropertyName("ReturnDataSet");
-                //jsonWriter.WriteValue(true);
-                jsonWriter.WriteEndObject();
-                jsonWriter.Close();
-                streamWriter.Write(sw.ToString());
-                streamWriter.Close();
+                using (StreamWriter streamWriter = new StreamWriter(request.GetRequestStream()))
+                {
+                    StringWriter sw = new StringWriter();
+                    JsonWriter jsonWriter = new JsonTextWriter(sw);
+                    jsonWriter.WriteStartObject();
+                    jsonWriter.WritePropertyName("Query");
+                    jsonWriter.WriteValue(command);
+                    jsonWriter.WritePropertyName("TaskName");
+                    jsonWriter.WriteValue(taskname);
+                    //jsonWriter.WritePropertyName("ReturnDataSet");
+                    //jsonWriter.WriteValue(true);
+                    jsonWriter.WriteEndObject();
+                    jsonWriter.Close();
+                    streamWriter.Write(sw.ToString());
+                }
 
                 DataSet ds = null;
                 using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
