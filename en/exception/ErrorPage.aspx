@@ -3,12 +3,8 @@
 
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
  <div class="content">
-     <h2>An error has occurred in Skyserver</h2>
-    <%if(!string.IsNullOrEmpty(ErrorMessage)){ %>
-    <div style="color: yellow; font-weight: bold">
-        <%=ErrorMessage%>
-    </div>
-     <%} %>
+     <h2>Sorry, something went wrong.</h2>
+     <p>SkyServer could not complete your request. Please check the values you submitted and try again later.</p>
 
 <br>
 <br> 
